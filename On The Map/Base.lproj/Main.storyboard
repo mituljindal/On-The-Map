@@ -60,6 +60,9 @@
                                 <state key="normal" title=" Sign Up">
                                     <color key="titleColor" red="0.088964188550000003" green="0.8271711652" blue="0.96216261390000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
+                                <connections>
+                                    <segue destination="Ge2-h3-rsZ" kind="presentation" id="nhs-o0-L9Q"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-u" translatesAutoresizingMaskIntoConstraints="NO" id="Tcy-s4-fqT">
                                 <rect key="frame" x="163" y="95" width="49" height="62"/>
@@ -93,6 +96,54 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="yOL-1V-4Tz">
+            <objects>
+                <viewController id="Ge2-h3-rsZ" customClass="WebViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QTK-qC-owQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="Gsp-qk-0Sk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6sk-HB-h13">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9dg-BP-Qep">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kvy-qn-bji">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <navigationItem id="cjl-eB-yhp">
+                                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="eQf-JZ-aOP">
+                                            <connections>
+                                                <action selector="done:" destination="Ge2-h3-rsZ" id="ECh-eN-enw"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Kvy-qn-bji" firstAttribute="leading" secondItem="9dg-BP-Qep" secondAttribute="leading" id="2Ug-AZ-zUB"/>
+                            <constraint firstItem="Kvy-qn-bji" firstAttribute="top" secondItem="QTK-qC-owQ" secondAttribute="bottom" id="Ppv-c7-U7P"/>
+                            <constraint firstItem="Gsp-qk-0Sk" firstAttribute="top" secondItem="9dg-BP-Qep" secondAttribute="bottom" id="edB-92-uYK"/>
+                            <constraint firstItem="9dg-BP-Qep" firstAttribute="top" secondItem="QTK-qC-owQ" secondAttribute="bottom" constant="44" id="h8o-YS-g8v"/>
+                            <constraint firstItem="Kvy-qn-bji" firstAttribute="trailing" secondItem="9dg-BP-Qep" secondAttribute="trailing" id="srE-Lb-4ap"/>
+                            <constraint firstItem="9dg-BP-Qep" firstAttribute="leading" secondItem="6sk-HB-h13" secondAttribute="leading" id="tXJ-Li-eVO"/>
+                            <constraint firstAttribute="trailing" secondItem="9dg-BP-Qep" secondAttribute="trailing" id="yeX-y6-mRL"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="9dg-BP-Qep" id="QIn-3V-aw2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kuh-qv-kmK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="845.60000000000002" y="138.98050974512745"/>
         </scene>
     </scenes>
     <resources>
