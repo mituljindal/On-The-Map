@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC08D5CA1F64134C004FA9A8 /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC08D5C91F64134C004FA9A8 /* GCDBlackBox.swift */; };
+		AC08D5CC1F6431EC004FA9A8 /* LoginDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC08D5CB1F6431EC004FA9A8 /* LoginDetails.swift */; };
 		AC62DFC41F55D5BD0014930F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC62DFC31F55D5BD0014930F /* AppDelegate.swift */; };
 		AC62DFC61F55D5BD0014930F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC62DFC51F55D5BD0014930F /* LoginViewController.swift */; };
 		AC62DFC91F55D5BD0014930F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC62DFC71F55D5BD0014930F /* Main.storyboard */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AC08D5C91F64134C004FA9A8 /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
+		AC08D5CB1F6431EC004FA9A8 /* LoginDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginDetails.swift; sourceTree = "<group>"; };
 		AC62DFC01F55D5BD0014930F /* On The Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "On The Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC62DFC31F55D5BD0014930F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC62DFC51F55D5BD0014930F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -56,10 +60,12 @@
 			children = (
 				AC62DFC31F55D5BD0014930F /* AppDelegate.swift */,
 				AC62DFC51F55D5BD0014930F /* LoginViewController.swift */,
+				AC08D5CB1F6431EC004FA9A8 /* LoginDetails.swift */,
 				AC62DFC71F55D5BD0014930F /* Main.storyboard */,
 				AC62DFCA1F55D5BD0014930F /* Assets.xcassets */,
 				AC62DFCC1F55D5BD0014930F /* LaunchScreen.storyboard */,
 				AC62DFCF1F55D5BD0014930F /* Info.plist */,
+				AC08D5C91F64134C004FA9A8 /* GCDBlackBox.swift */,
 			);
 			path = "On The Map";
 			sourceTree = "<group>";
@@ -137,6 +143,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC08D5CC1F6431EC004FA9A8 /* LoginDetails.swift in Sources */,
+				AC08D5CA1F64134C004FA9A8 /* GCDBlackBox.swift in Sources */,
 				AC62DFC61F55D5BD0014930F /* LoginViewController.swift in Sources */,
 				AC62DFC41F55D5BD0014930F /* AppDelegate.swift in Sources */,
 			);
