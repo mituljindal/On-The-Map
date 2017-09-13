@@ -10,13 +10,17 @@ import UIKit
 
 class WebViewController: UIViewController {
     
+    var urlString: String?
+    
     @IBOutlet weak var webView: UIWebView!
     
-    let url = URL(string: "https://www.udacity.com/account/auth#!/signup")
-    
     override func viewDidLoad() {
+        
+        guard let url = URL(string: urlString!) else {
+            return
+        }
     
-        let request = URLRequest(url: url!)
+        let request = URLRequest(url: url)
         webView.loadRequest(request)
     }
     

@@ -26,7 +26,7 @@
                                 <rect key="frame" x="54" y="214" width="266" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8hh-WF-IZe">
                                 <rect key="frame" x="54" y="311" width="266" height="38"/>
@@ -59,7 +59,7 @@
                                     <color key="titleColor" red="0.088964188550000003" green="0.8271711652" blue="0.96216261390000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Ge2-h3-rsZ" kind="presentation" id="nhs-o0-L9Q"/>
+                                    <action selector="signUpPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bx6-8J-6FQ"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-u" translatesAutoresizingMaskIntoConstraints="NO" id="Tcy-s4-fqT">
@@ -106,7 +106,7 @@
         <!--Web View Controller-->
         <scene sceneID="yOL-1V-4Tz">
             <objects>
-                <viewController id="Ge2-h3-rsZ" customClass="WebViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WebViewController" id="Ge2-h3-rsZ" customClass="WebViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QTK-qC-owQ"/>
                         <viewControllerLayoutGuide type="bottom" id="Gsp-qk-0Sk"/>
@@ -184,6 +184,9 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="mKO-aj-9B2">
                                 <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <connections>
+                                    <outlet property="delegate" destination="HGK-OV-Oj3" id="qRV-CJ-CTf"/>
+                                </connections>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import SafariServices
 
 class MapViewController: UIViewController, MKMapViewDelegate {
     
@@ -21,9 +22,18 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         
         appDelegate = UIApplication.shared.delegate as! AppDelegate
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        self.getStudentLocations()
-        
+        if self.appDelegate.locationsArray.count == 0 {
+            self.getStudentLocations()
+        } else {
+            print(self.appDelegate.locationsArray)
+//            print("appDelegate array not empty")
+//            self.populateMap(self.appDelegate.locationsArray)
+        }
     }
     
     func getStudentLocations() {
@@ -65,17 +75,16 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             }
             
             if let arr = parsedResult["results"] {
-                self.appDelegate.locationsArray = arr as! [[String : AnyObject]]
+                self.locationsArray = arr as! [[String : AnyObject]]
             }
-//            print(self.appDelegate.locationsArray)
-            self.populateMap()
+            self.populateMap(self.locationsArray!)
         }
         task.resume()
     }
     
-    func populateMap() {
+    func populateMap(_ locationsArray: [[String:AnyObject]]) {
         
-        for dictionary in self.appDelegate.locationsArray! {
+        for dictionary in locationsArray {
             
             var coordinate: CLLocationCoordinate2D?
             var first: String! = ""
@@ -116,7 +125,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             annotation.subtitle = mediaURL!
             
             annotations.append(annotation)
+            self.appDelegate.locationsArray.append(dictionary)
         }
+//        print(annotations)
         print(annotations.count)
         
         self.mapView.addAnnotations(annotations)
@@ -143,9 +154,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
-            let app = UIApplication.shared
-            if let toOpen = view.annotation?.subtitle! {
-                app.canOpenURL(URL(string: toOpen)!)
+            if let urlString = view.annotation?.subtitle {
+                loadWebView(urlString!)
             }
         }
     }
@@ -156,5 +166,13 @@ extension MapViewController {
         let ac = UIAlertController(title: title, message: error, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default))
         self.present(ac, animated: true)
+    }
+    
+    func loadWebView(_ urlString: String) {
+        var controller: WebViewController
+        controller = self.storyboard?.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
+        
+        controller.urlString = urlString
+        present(controller, animated: true, completion: nil)
     }
 }

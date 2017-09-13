@@ -118,6 +118,15 @@ class LoginViewController: UIViewController {
         let controller = storyboard?.instantiateViewController(withIdentifier: "MapTabController") as! UITabBarController
         self.present(controller, animated: true, completion: nil)
     }
+    
+    @IBAction func signUpPressed(_ sender: Any) {
+        var controller: WebViewController
+        controller = self.storyboard?.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
+        
+        controller.urlString = "https://www.udacity.com/account/auth#!/signup"
+        present(controller, animated: true, completion: nil)
+    }
+    
 }
 
 private extension LoginViewController {

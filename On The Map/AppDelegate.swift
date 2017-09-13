@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     var loginDetails: LoginDetails? = nil
-    var locationsArray: [[String: AnyObject]]!
+    var locationsArray: [[String: AnyObject]] = []
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
