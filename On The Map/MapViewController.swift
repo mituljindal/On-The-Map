@@ -17,97 +17,109 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     var annotations = [MKPointAnnotation]()
     var locationsArray: [[String: AnyObject]]!
     struct E: Error{}
+//    var tab: TabBarViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("In viewDidLoad of MapViewController")
+        
+//        tab = tabBarController as? TabBarViewController
+//        tab.getStudentLocations(skip: 0)
+        
         appDelegate = UIApplication.shared.delegate as! AppDelegate
+        locationsArray = appDelegate.locationsArray
+        populateMap()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if self.appDelegate.locationsArray.count == 0 {
-            self.getStudentLocations()
-        } else {
-            print(self.appDelegate.locationsArray)
+//        if self.appDelegate.locationsArray.count == 0 {
+//            self.getStudentLocations()
+//        } else {
+//            print(self.appDelegate.locationsArray)
 //            print("appDelegate array not empty")
 //            self.populateMap(self.appDelegate.locationsArray)
-        }
+//        }
     }
     
-    func getStudentLocations() {
-        
-        var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
-        request.httpMethod = "GET"
-        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
-        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
-        let session = URLSession.shared
-        let task = session.dataTask(with: request as URLRequest) { data, response, error in
-            func displayError(_ error: String) {
-                print(error)
-                performUIUpdatesOnMain {
-                    self.presentAlert(title: "error", error: error)
-                }
-            }
-            
-            guard (error == nil) else {
-                displayError("There was an error with your request: \(error!)")
-                return
-            }
-            
-            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                displayError("Your request returned a status code other than 2xx!: ")
-                return
-            }
-            
-            guard let data = data else {
-                displayError("No data was returned by the request!")
-                return
-            }
-            
-            let parsedResult: [String:AnyObject]!
-            do {
-                parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
-            } catch {
-                displayError("Could not parse the data as JSON: '\(data)'")
-                return
-            }
-            
-            if let arr = parsedResult["results"] {
-                self.locationsArray = arr as! [[String : AnyObject]]
-            }
-            self.populateMap(self.locationsArray!)
-        }
-        task.resume()
-    }
+//    func getStudentLocations() {
+//        
+//        var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
+//        request.httpMethod = "GET"
+//        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
+//        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
+//        let session = URLSession.shared
+//        let task = session.dataTask(with: request as URLRequest) { data, response, error in
+//            func displayError(_ error: String) {
+//                print(error)
+//                performUIUpdatesOnMain {
+//                    self.presentAlert(title: "error", error: error)
+//                }
+//            }
+//            
+//            guard (error == nil) else {
+//                displayError("There was an error with your request: \(error!)")
+//                return
+//            }
+//            
+//            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+//                displayError("Your request returned a status code other than 2xx!: ")
+//                return
+//            }
+//            
+//            guard let data = data else {
+//                displayError("No data was returned by the request!")
+//                return
+//            }
+//            
+//            let parsedResult: [String:AnyObject]!
+//            do {
+//                parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
+//            } catch {
+//                displayError("Could not parse the data as JSON: '\(data)'")
+//                return
+//            }
+//            
+//            if let arr = parsedResult["results"] {
+//                self.locationsArray = arr as! [[String : AnyObject]]
+//            }
+//            self.populateMap(self.locationsArray!)
+//        }
+//        task.resume()
+//    }
     
-    func populateMap(_ locationsArray: [[String:AnyObject]]) {
+    func populateMap() {
         
-        for dictionary in locationsArray {
+        for dictionary in self.locationsArray {
             
-            var coordinate: CLLocationCoordinate2D?
+            let lat = CLLocationDegrees(dictionary["latitude"] as! Double)
+            let long = CLLocationDegrees(dictionary["longitude"] as! Double)
+            
+            
+            let coordinate = CLLocationCoordinate2DMake(lat, long)
             var first: String! = ""
             var last: String! = ""
             var mediaURL: String! = ""
             
 //            guard let led = dictionary["latitude"] as? String else { throws (continue)  }
             
-            if let latitude = dictionary["latitude"] {
-                if latitude is NSNull {
-                    continue
-                } else {
-                    let lat = CLLocationDegrees(latitude as! Double)
-                    if let longitude = dictionary["longitude"] {
-                        if longitude is NSNull {
-                            continue
-                        } else  {
-                            let long = CLLocationDegrees(longitude as! Double)
-                            coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-                        }
-                    } else  { continue }
-                }
-            } else { continue }
+//            if let latitude = dictionary["latitude"] {
+//                if latitude is NSNull {
+//                    continue
+//                } else {
+//                    let lat = CLLocationDegrees(latitude as! Double)
+//                    if let longitude = dictionary["longitude"] {
+//                        if longitude is NSNull {
+//                            continue
+//                        } else  {
+//                            let long = CLLocationDegrees(longitude as! Double)
+//                            coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+//                        }
+//                    } else  { continue }
+//                }
+//            } else { continue }
             
             if let _ = dictionary["firstName"] {
                 first = dictionary["firstName"] as? String
@@ -120,12 +132,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             }
             
             let annotation = MKPointAnnotation()
-            annotation.coordinate = coordinate!
+            annotation.coordinate = coordinate
             annotation.title = "\(first!) \(last!)"
             annotation.subtitle = mediaURL!
             
             annotations.append(annotation)
-            self.appDelegate.locationsArray.append(dictionary)
+//            self.appDelegate.locationsArray.append(dictionary)
         }
 //        print(annotations)
         print(annotations.count)

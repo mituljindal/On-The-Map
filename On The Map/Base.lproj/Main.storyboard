@@ -154,7 +154,7 @@
         <!--List-->
         <scene sceneID="737-tk-hqe">
             <objects>
-                <viewController id="v74-Xv-A8l" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TableViewController" id="v74-Xv-A8l" customClass="TableViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hIu-91-6nz"/>
                         <viewControllerLayoutGuide type="bottom" id="dee-00-8gj"/>
@@ -162,13 +162,38 @@
                     <view key="view" contentMode="scaleToFill" id="au3-H6-Jyl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YYL-Rl-Nau">
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationCell" id="wgL-Uo-BWd">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wgL-Uo-BWd" id="K1b-jh-Nrf">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="YYL-Rl-Nau" secondAttribute="trailing" constant="-16" id="FWb-0C-JGa"/>
+                            <constraint firstItem="dee-00-8gj" firstAttribute="top" secondItem="YYL-Rl-Nau" secondAttribute="bottom" id="Jxv-av-hXo"/>
+                            <constraint firstItem="YYL-Rl-Nau" firstAttribute="leading" secondItem="au3-H6-Jyl" secondAttribute="leadingMargin" constant="-16" id="N8s-XV-Vr9"/>
+                            <constraint firstItem="YYL-Rl-Nau" firstAttribute="top" secondItem="hIu-91-6nz" secondAttribute="bottom" id="dnH-WW-4J9"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="List" image="icon_listview-deselected" id="itx-dM-Xs6"/>
+                    <connections>
+                        <outlet property="tableView" destination="YYL-Rl-Nau" id="5Bm-G9-AQX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="daM-Dh-oHT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="846" y="1483"/>
+            <point key="canvasLocation" x="845.60000000000002" y="1482.9085457271365"/>
         </scene>
         <!--Map-->
         <scene sceneID="9tj-CS-rqd">

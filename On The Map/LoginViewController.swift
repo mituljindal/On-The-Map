@@ -115,7 +115,7 @@ class LoginViewController: UIViewController {
         
         appDelegate.loginDetails = .init(userID: self.userID!, sessionID: self.sessionID!)
         
-        let controller = storyboard?.instantiateViewController(withIdentifier: "MapTabController") as! UITabBarController
+        let controller = storyboard?.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
         self.present(controller, animated: true, completion: nil)
     }
     
