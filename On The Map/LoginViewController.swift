@@ -93,7 +93,7 @@ class LoginViewController: UIViewController {
                         if registered == true {
                             self.userID = account["key"] as! String
                             self.sessionID = (parsedResult["session"] as! [String: AnyObject])["id"] as! String
-                            self.getStudentLocations()
+                            self.completeLogin()
                         } else {
                             self.presentAlert(title: "Account not found", error: "Incorrect username or password")
                             return
@@ -104,11 +104,6 @@ class LoginViewController: UIViewController {
             }
             task.resume()
         }
-    }
-    
-    func getStudentLocations() {
-        
-        self.completeLogin()
     }
     
     func completeLogin() {
@@ -122,22 +117,13 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func signUpPressed(_ sender: Any) {
-        var controller: WebViewController
-        controller = self.storyboard?.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
         
-        controller.urlString = "https://www.udacity.com/account/auth#!/signup"
-        present(controller, animated: true, completion: nil)
+        loadWebView("https://www.udacity.com/account/auth#!/signup")
     }
     
 }
 
 private extension LoginViewController {
-    
-    func presentAlert(title: String, error: String) {
-        let ac = UIAlertController(title: title, message: error, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default))
-        self.present(ac, animated: true)
-    }
     
     func hideKeyboard() {
         if emailTextField.isFirstResponder  {

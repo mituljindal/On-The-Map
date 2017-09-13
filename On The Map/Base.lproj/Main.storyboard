@@ -237,7 +237,7 @@
         <!--Map-->
         <scene sceneID="Pr6-V9-ZWG">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bFJ-Uh-fyJ" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bFJ-Uh-fyJ" customClass="NavController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" image="icon_mapview-deselected" id="KKp-mz-USp"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="lXd-e2-swx">
@@ -256,7 +256,7 @@
         <!--List-->
         <scene sceneID="Bim-Nz-qQN">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="23s-Pe-ZMz" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="23s-Pe-ZMz" customClass="NavController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="List" image="icon_listview-deselected" id="C5n-Wl-s3F"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ipd-AE-K8I">

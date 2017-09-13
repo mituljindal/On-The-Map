@@ -14,20 +14,11 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
     var locationsArray: [[String: AnyObject]]!
     
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        
-//        print("In TabBarViewController")
-//        
-//        appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        
-//        self.getStudentLocations(skip: 0)
-//    }
+    func logout() {}
     
     func getStudentLocations(skip: Int) {
         
         self.locationsArray = nil
-//        print("getting locations")
         
         var urlString = "https://parse.udacity.com/parse/classes/StudentLocation"
         if skip != 0 {
@@ -72,33 +63,24 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
             if let arr = parsedResult["results"] {
                 self.locationsArray = arr as! [[String : AnyObject]]
             }
-//            self.populateMap(self.locationsArray!)
-//            print("got locations")
             self.populateArray()
         }
         task.resume()
     }
     
     func populateArray() {
-        
-//        print("populating array")
+
         var i = 100
         
         for dictionary in self.locationsArray {
-            
-//            var coordinate: CLLocationCoordinate2D?
         
             if let latitude = dictionary["latitude"] {
                 if latitude is NSNull {
                     continue
                 } else {
-//                    let lat = CLLocationDegrees(latitude as! Double)
                     if let longitude = dictionary["longitude"] {
                         if longitude is NSNull {
                             continue
-                        } else  {
-//                            let long = CLLocationDegrees(longitude as! Double)
-//                            coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
                         }
                     } else  { continue }
                 }
@@ -113,23 +95,11 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
             if self.appDelegate.locationsArray.count == 100 {
                 break
             }
-            
-//            print("added one location")
         }
+        
         if self.appDelegate.locationsArray.count < 100 {
             getStudentLocations(skip: i)
             i += 100
         }
-//        print(appDelegate.locationsArray.count)
-//        print("array populated")
-    }
-    
-}
-
-extension TabBarViewController {
-    func presentAlert(title: String, error: String) {
-        let ac = UIAlertController(title: title, message: error, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default))
-        self.present(ac, animated: true)
     }
 }
