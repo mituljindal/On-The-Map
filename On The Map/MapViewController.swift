@@ -17,23 +17,31 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     var annotations = [MKPointAnnotation]()
     var locationsArray: [[String: AnyObject]]!
     struct E: Error{}
-//    var tab: TabBarViewController!
+    var tab: TabBarViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("In viewDidLoad of MapViewController")
+//        print("In viewDidLoad of MapViewController")
+        
+//        (self.tabBarController as? CustomTabBarController)?.myFunctionToCallFromAnywhere()
+        (self.tabBarController as? TabBarViewController)?.getStudentLocations(skip: 0)
+//        print("after")
         
 //        tab = tabBarController as? TabBarViewController
 //        tab.getStudentLocations(skip: 0)
         
         appDelegate = UIApplication.shared.delegate as! AppDelegate
         locationsArray = appDelegate.locationsArray
-        populateMap()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+//        print("calling populate map")
+        locationsArray = appDelegate.locationsArray
+        populateMap()
         
 //        if self.appDelegate.locationsArray.count == 0 {
 //            self.getStudentLocations()
@@ -140,7 +148,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 //            self.appDelegate.locationsArray.append(dictionary)
         }
 //        print(annotations)
-        print(annotations.count)
+//        print(annotations.count)
         
         self.mapView.addAnnotations(annotations)
     }

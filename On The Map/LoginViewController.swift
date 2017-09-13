@@ -115,6 +115,8 @@ class LoginViewController: UIViewController {
         
         appDelegate.loginDetails = .init(userID: self.userID!, sessionID: self.sessionID!)
         
+        print("login completed")
+        
         let controller = storyboard?.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
         self.present(controller, animated: true, completion: nil)
     }
