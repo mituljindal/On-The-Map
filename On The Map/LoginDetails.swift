@@ -8,13 +8,9 @@
 
 import Foundation
 
-struct loginDetails {
+struct LoginDetails {
     
     var userID: String!
     var sessionID: String!
-
-//    init() {
-//        userID = ""
-//        sessionID = ""
-//    }
+    
 }

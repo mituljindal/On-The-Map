@@ -22,6 +22,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
         setUI(true)
     }
     
@@ -63,10 +65,6 @@ class LoginViewController: UIViewController {
                     return
                 }
                 
-//                if let statusCode = (response as? HTTPURLResponse)?.statusCode {
-//                    self.presentAlert(title: "error", error: "\(statusCode)")
-//                }
-                
                 guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
                     displayError("Your request returned a status code other than 2xx!: ")
                     return
@@ -80,10 +78,6 @@ class LoginViewController: UIViewController {
                 let range = Range(5..<data.count)
                 
                 let newData = data.subdata(in: range)
-//                print("result: /n/n")
-//                print(NSString(data: newData, encoding: String.Encoding.utf8.rawValue)!)
-                
-//                self.presentAlert(title: "success", error: "ADf:")
                 
                 let parsedResult: [String:AnyObject]!
                 
@@ -99,7 +93,7 @@ class LoginViewController: UIViewController {
                         if registered == true {
                             self.userID = account["key"] as! String
                             self.sessionID = (parsedResult["session"] as! [String: AnyObject])["id"] as! String
-                            self.completeLogin()
+                            self.getStudentLocations()
                         } else {
                             self.presentAlert(title: "Account not found", error: "Incorrect username or password")
                             return
@@ -112,8 +106,17 @@ class LoginViewController: UIViewController {
         }
     }
     
+    func getStudentLocations() {
+        
+        self.completeLogin()
+    }
+    
     func completeLogin() {
-        self.appDelegate.loginDetails = loginDetails.init(userID: self.userID, sessionID: self.sessionID)
+        
+        appDelegate.loginDetails = .init(userID: self.userID!, sessionID: self.sessionID!)
+        
+        let controller = storyboard?.instantiateViewController(withIdentifier: "MapTabController") as! UITabBarController
+        self.present(controller, animated: true, completion: nil)
     }
 }
 
@@ -122,7 +125,7 @@ private extension LoginViewController {
     func presentAlert(title: String, error: String) {
         let ac = UIAlertController(title: title, message: error, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default))
-        present(ac, animated: true)
+        self.present(ac, animated: true)
     }
     
     func hideKeyboard() {
