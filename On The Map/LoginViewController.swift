@@ -15,17 +15,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     
-    var userID: String!
-    var sessionID: String!
-    var appDelegate: AppDelegate!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        emailTextField.text = "mituljindal@gmail.com"
-        passwordTextField.text = "Ngnr9591"
-        
-        appDelegate = UIApplication.shared.delegate as! AppDelegate
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         setUI(true)
     }
@@ -94,8 +85,6 @@ class LoginViewController: UIViewController {
                 if let account = parsedResult["account"] as? [String: AnyObject] {
                     if let registered = account["registered"] as? Bool {
                         if registered == true {
-                            self.userID = account["key"] as! String
-                            self.sessionID = (parsedResult["session"] as! [String: AnyObject])["id"] as! String
                             self.completeLogin()
                         } else {
                             self.presentAlert(title: "Account not found", error: "Incorrect username or password")
@@ -110,10 +99,6 @@ class LoginViewController: UIViewController {
     }
     
     func completeLogin() {
-        
-        appDelegate.loginDetails = .init(userID: self.userID!, sessionID: self.sessionID!)
-        
-        print("login completed")
         
         let controller = storyboard?.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
         self.present(controller, animated: true, completion: nil)

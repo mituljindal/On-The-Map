@@ -14,7 +14,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="On_The_Map" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginViewController" id="BYZ-38-t0r" customClass="LoginViewController" customModule="On_The_Map" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -180,10 +180,24 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="7kF-00-gHY">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="d7h-Kt-gAe"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="d7h-Kt-gAe">
+                            <connections>
+                                <action selector="logout:" destination="HGK-OV-Oj3" id="tPd-3i-ZxQ"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="refresh" id="nNW-VB-h7W"/>
-                            <barButtonItem image="icon_pin" id="dBl-8B-c6V"/>
+                            <barButtonItem systemItem="refresh" id="nNW-VB-h7W">
+                                <connections>
+                                    <action selector="refresh:" destination="HGK-OV-Oj3" id="1rx-tU-WPZ"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="icon_pin" id="dBl-8B-c6V">
+                                <connections>
+                                    <segue destination="tTu-xH-vvt" kind="popoverPresentation" popoverAnchorBarButtonItem="dBl-8B-c6V" id="4s4-KV-j20">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
@@ -236,16 +250,55 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="xda-lt-ug9">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="xbX-ik-loo"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="xbX-ik-loo">
+                            <connections>
+                                <action selector="logout:" destination="jom-zO-9ik" id="yI3-bh-t5N"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="refresh" id="BAN-cm-p8I"/>
-                            <barButtonItem image="icon_pin" id="GDf-PX-FTn"/>
+                            <barButtonItem systemItem="refresh" id="BAN-cm-p8I">
+                                <connections>
+                                    <action selector="refresh:" destination="jom-zO-9ik" id="GIA-DZ-sDz"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="icon_pin" id="GDf-PX-FTn">
+                                <connections>
+                                    <segue destination="tTu-xH-vvt" kind="popoverPresentation" popoverAnchorBarButtonItem="GDf-PX-FTn" id="qAp-yp-ymG">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AwD-MO-oLN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1784.8" y="1507.1964017991006"/>
+        </scene>
+        <!--Post Location View Controller-->
+        <scene sceneID="qcn-Bi-rZr">
+            <objects>
+                <viewController id="P9F-Zm-uek" customClass="PostLocationViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="VaP-Jm-0u0"/>
+                        <viewControllerLayoutGuide type="bottom" id="jx0-7J-5Oz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9Qv-7K-7gN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="0w7-75-JL2">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="qss-Kk-aKX">
+                            <connections>
+                                <action selector="cancelPressed:" destination="P9F-Zm-uek" id="u3s-CU-ypU"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lOe-FS-mQY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3684" y="1180.6596701649175"/>
         </scene>
         <!--Map-->
         <scene sceneID="Pr6-V9-ZWG">
@@ -285,6 +338,24 @@
             </objects>
             <point key="canvasLocation" x="845.60000000000002" y="1507.1964017991006"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="f9n-dL-CgD">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tTu-xH-vvt" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Owf-5J-afM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="P9F-Zm-uek" kind="relationship" relationship="rootViewController" id="m1S-6l-3Zz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J46-2f-fP6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2744.8000000000002" y="1180.6596701649175"/>
+        </scene>
     </scenes>
     <resources>
         <image name="icon_listview-deselected" width="75" height="50"/>
@@ -292,4 +363,7 @@
         <image name="icon_pin" width="24" height="24"/>
         <image name="logo-u" width="62" height="62"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="qAp-yp-ymG"/>
+    </inferredMetricsTieBreakers>
 </document>

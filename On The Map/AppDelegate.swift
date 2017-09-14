@@ -13,7 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    var loginDetails: LoginDetails? = nil
     var locationsArray: [[String: AnyObject]] = []
 
 

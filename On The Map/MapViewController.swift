@@ -15,11 +15,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
     var annotations = [MKPointAnnotation]()
-//    var locationsArray: [[String: AnyObject]]!
+    var locationsArray: [[String: AnyObject]]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.locationsArray = appDelegate.locationsArray
         NotificationCenter.default.addObserver(self, selector: #selector(populate(notification:)), name: .updatedLocations, object: nil)
         
         updateMap {
@@ -28,18 +29,16 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func populate(notification: NSNotification) {
-        print("got notification")
+        self.locationsArray = appDelegate.locationsArray
         populateMap()
     }
 
     func populateMap() {
-        
-//        self.locationsArray = appDelegate.locationsArray
-        for dictionary in appDelegate.locationsArray {
+
+        for dictionary in self.locationsArray {
             
             let lat = CLLocationDegrees(dictionary["latitude"] as! Double)
             let long = CLLocationDegrees(dictionary["longitude"] as! Double)
-            
             
             let coordinate = CLLocationCoordinate2DMake(lat, long)
             var first: String! = ""
@@ -92,5 +91,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 loadWebView(urlString!)
             }
         }
+    }
+    
+    @IBAction func logout(_ sender: Any) {
+        (self.tabBarController as? TabBarViewController)?.logout()
+    }
+    
+    @IBAction func refresh(_ sender: Any) {
+        (self.tabBarController as? TabBarViewController)?.refresh()
     }
 }
