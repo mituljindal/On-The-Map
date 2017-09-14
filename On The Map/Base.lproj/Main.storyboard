@@ -226,10 +226,10 @@
             </objects>
             <point key="canvasLocation" x="-106" y="1155"/>
         </scene>
-        <!--Student Table View Controller-->
+        <!--List View Controller-->
         <scene sceneID="EWd-Ud-JvO">
             <objects>
-                <tableViewController id="jom-zO-9ik" customClass="StudentTableViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="jom-zO-9ik" customClass="ListViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="2jo-gL-D8x">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

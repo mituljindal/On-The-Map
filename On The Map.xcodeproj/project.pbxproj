@@ -10,7 +10,7 @@
 		AC08D5CA1F64134C004FA9A8 /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC08D5C91F64134C004FA9A8 /* GCDBlackBox.swift */; };
 		AC08D5D01F643A1D004FA9A8 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC08D5CF1F643A1D004FA9A8 /* WebViewController.swift */; };
 		AC0D608E1F6AC87900655AAB /* PostLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D608D1F6AC87900655AAB /* PostLocationViewController.swift */; };
-		AC25FF7F1F69C9CF009DD9D5 /* StudentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC25FF7E1F69C9CF009DD9D5 /* StudentsTableViewController.swift */; };
+		AC25FF7F1F69C9CF009DD9D5 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC25FF7E1F69C9CF009DD9D5 /* ListViewController.swift */; };
 		AC25FF831F69DFA5009DD9D5 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC25FF821F69DFA5009DD9D5 /* UIViewControllerExtension.swift */; };
 		AC62DFC41F55D5BD0014930F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC62DFC31F55D5BD0014930F /* AppDelegate.swift */; };
 		AC62DFC61F55D5BD0014930F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC62DFC51F55D5BD0014930F /* LoginViewController.swift */; };
@@ -25,7 +25,7 @@
 		AC08D5C91F64134C004FA9A8 /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		AC08D5CF1F643A1D004FA9A8 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		AC0D608D1F6AC87900655AAB /* PostLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostLocationViewController.swift; sourceTree = "<group>"; };
-		AC25FF7E1F69C9CF009DD9D5 /* StudentsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentsTableViewController.swift; sourceTree = "<group>"; };
+		AC25FF7E1F69C9CF009DD9D5 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		AC25FF821F69DFA5009DD9D5 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		AC62DFC01F55D5BD0014930F /* On The Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "On The Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC62DFC31F55D5BD0014930F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -78,7 +78,7 @@
 				AC08D5CF1F643A1D004FA9A8 /* WebViewController.swift */,
 				ACF64DFD1F653B63007AD337 /* MapViewController.swift */,
 				ACC2156B1F691B2D00F25CC2 /* TabBarViewController.swift */,
-				AC25FF7E1F69C9CF009DD9D5 /* StudentsTableViewController.swift */,
+				AC25FF7E1F69C9CF009DD9D5 /* ListViewController.swift */,
 				AC25FF821F69DFA5009DD9D5 /* UIViewControllerExtension.swift */,
 				AC0D608D1F6AC87900655AAB /* PostLocationViewController.swift */,
 			);
@@ -160,7 +160,7 @@
 			files = (
 				ACF64DFE1F653B63007AD337 /* MapViewController.swift in Sources */,
 				AC08D5CA1F64134C004FA9A8 /* GCDBlackBox.swift in Sources */,
-				AC25FF7F1F69C9CF009DD9D5 /* StudentsTableViewController.swift in Sources */,
+				AC25FF7F1F69C9CF009DD9D5 /* ListViewController.swift in Sources */,
 				ACC2156C1F691B2D00F25CC2 /* TabBarViewController.swift in Sources */,
 				AC62DFC61F55D5BD0014930F /* LoginViewController.swift in Sources */,
 				AC0D608E1F6AC87900655AAB /* PostLocationViewController.swift in Sources */,

@@ -14,7 +14,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
     var locationsArray: [[String: AnyObject]]!
     let map = MapViewController()
-    let list = StudentTableViewController()
+    let list = ListViewController()
     
     func getStudentLocations(skip: Int) {
         

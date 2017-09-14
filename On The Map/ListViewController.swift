@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StudentTableViewController: UITableViewController {
+class ListViewController: UITableViewController {
 
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var locationsArray: [[String: AnyObject]]!
