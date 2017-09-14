@@ -20,6 +20,16 @@ class StudentTableViewController: UITableViewController {
 //        tableView.reloadData()
 //    }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reload(notification:)), name: .updatedLocations, object: nil)
+    }
+    
+    func reload(notification: NSNotification) {
+        tableView.reloadData()
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return appDelegate.locationsArray.count
     }
