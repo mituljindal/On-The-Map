@@ -128,8 +128,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
             let newData = data?.subdata(in: range) /* subset response data! */
             print(NSString(data: newData!, encoding: String.Encoding.utf8.rawValue)!)
             
-            let controller = self.storyboard?.instantiateViewController(withIdentifier: "loginViewController") as! LoginViewController
-            self.present(controller, animated: true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }
         task.resume()
     }
