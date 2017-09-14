@@ -22,6 +22,9 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        emailTextField.text = "mituljindal@gmail.com"
+        passwordTextField.text = "Ngnr9591"
+        
         appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         setUI(true)

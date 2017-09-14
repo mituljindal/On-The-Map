@@ -24,3 +24,7 @@ extension UIViewController {
         present(controller, animated: true, completion: nil)
     }
 }
+
+extension Notification.Name {
+    static let updatedLocations = Notification.Name("updatedLocations")
+}

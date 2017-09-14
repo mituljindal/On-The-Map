@@ -13,6 +13,8 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
     var locationsArray: [[String: AnyObject]]!
+    let map = MapViewController()
+    let list = StudentTableViewController()
     
     func logout() {}
     
@@ -69,8 +71,6 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     }
     
     func populateArray() {
-
-        var i = 100
         
         for dictionary in self.locationsArray {
         
@@ -98,8 +98,10 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         }
         
         if self.appDelegate.locationsArray.count < 100 {
-            getStudentLocations(skip: i)
-            i += 100
+            getStudentLocations(skip: 100)
+        } else {
+            print("posting notification")
+            NotificationCenter.default.post(name: .updatedLocations, object: nil)
         }
     }
 }

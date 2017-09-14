@@ -13,3 +13,9 @@ func performUIUpdatesOnMain(_ updates: @escaping () -> Void) {
         updates()
     }
 }
+
+func updateMap(_ update: @escaping () -> Void) {
+    DispatchQueue.main.async {
+        update()
+    }
+}

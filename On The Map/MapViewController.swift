@@ -13,27 +13,28 @@ import SafariServices
 class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
-    var appDelegate: AppDelegate!
+    var appDelegate = UIApplication.shared.delegate as! AppDelegate
     var annotations = [MKPointAnnotation]()
-    struct E: Error{}
-    var tab: TabBarViewController!
+//    var locationsArray: [[String: AnyObject]]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        (self.tabBarController as? TabBarViewController)?.getStudentLocations(skip: 0)
+        NotificationCenter.default.addObserver(self, selector: #selector(populate(notification:)), name: .updatedLocations, object: nil)
         
-        appDelegate = UIApplication.shared.delegate as! AppDelegate
+        updateMap {
+            (self.tabBarController as? TabBarViewController)?.getStudentLocations(skip: 0)
+        }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
+    func populate(notification: NSNotification) {
+        print("got notification")
         populateMap()
     }
 
     func populateMap() {
         
+//        self.locationsArray = appDelegate.locationsArray
         for dictionary in appDelegate.locationsArray {
             
             let lat = CLLocationDegrees(dictionary["latitude"] as! Double)
@@ -62,8 +63,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             annotations.append(annotation)
         }
-        
-        self.mapView.addAnnotations(annotations)
+//        print(self)
+        mapView.addAnnotations(annotations)
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {

@@ -11,12 +11,14 @@ import UIKit
 class StudentTableViewController: UITableViewController {
 
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        tableView.reloadData()
-    }
+//    var locationsArray: [[String: AnyObject]]!
+//   
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        self.locationsArray = appDelegate.locationsArray
+//        tableView.reloadData()
+//    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return appDelegate.locationsArray.count
