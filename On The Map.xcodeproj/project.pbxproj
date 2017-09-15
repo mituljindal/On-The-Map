@@ -17,6 +17,8 @@
 		AC62DFC91F55D5BD0014930F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC62DFC71F55D5BD0014930F /* Main.storyboard */; };
 		AC62DFCB1F55D5BD0014930F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC62DFCA1F55D5BD0014930F /* Assets.xcassets */; };
 		AC62DFCE1F55D5BD0014930F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC62DFCC1F55D5BD0014930F /* LaunchScreen.storyboard */; };
+		ACB004AD1F6BC53F003EB025 /* TextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB004AC1F6BC53F003EB025 /* TextViewDelegate.swift */; };
+		ACB004AF1F6BCBB0003EB025 /* TextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB004AE1F6BCBB0003EB025 /* TextFieldDelegate.swift */; };
 		ACC2156C1F691B2D00F25CC2 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC2156B1F691B2D00F25CC2 /* TabBarViewController.swift */; };
 		ACF64DFE1F653B63007AD337 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF64DFD1F653B63007AD337 /* MapViewController.swift */; };
 /* End PBXBuildFile section */
@@ -34,6 +36,8 @@
 		AC62DFCA1F55D5BD0014930F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AC62DFCD1F55D5BD0014930F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AC62DFCF1F55D5BD0014930F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ACB004AC1F6BC53F003EB025 /* TextViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewDelegate.swift; sourceTree = "<group>"; };
+		ACB004AE1F6BCBB0003EB025 /* TextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldDelegate.swift; sourceTree = "<group>"; };
 		ACC2156B1F691B2D00F25CC2 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		ACF64DFD1F653B63007AD337 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,6 +85,8 @@
 				AC25FF7E1F69C9CF009DD9D5 /* ListViewController.swift */,
 				AC25FF821F69DFA5009DD9D5 /* UIViewControllerExtension.swift */,
 				AC0D608D1F6AC87900655AAB /* PostLocationViewController.swift */,
+				ACB004AC1F6BC53F003EB025 /* TextViewDelegate.swift */,
+				ACB004AE1F6BCBB0003EB025 /* TextFieldDelegate.swift */,
 			);
 			path = "On The Map";
 			sourceTree = "<group>";
@@ -162,8 +168,10 @@
 				AC08D5CA1F64134C004FA9A8 /* GCDBlackBox.swift in Sources */,
 				AC25FF7F1F69C9CF009DD9D5 /* ListViewController.swift in Sources */,
 				ACC2156C1F691B2D00F25CC2 /* TabBarViewController.swift in Sources */,
+				ACB004AF1F6BCBB0003EB025 /* TextFieldDelegate.swift in Sources */,
 				AC62DFC61F55D5BD0014930F /* LoginViewController.swift in Sources */,
 				AC0D608E1F6AC87900655AAB /* PostLocationViewController.swift in Sources */,
+				ACB004AD1F6BC53F003EB025 /* TextViewDelegate.swift in Sources */,
 				AC08D5D01F643A1D004FA9A8 /* WebViewController.swift in Sources */,
 				AC25FF831F69DFA5009DD9D5 /* UIViewControllerExtension.swift in Sources */,
 				AC62DFC41F55D5BD0014930F /* AppDelegate.swift in Sources */,
