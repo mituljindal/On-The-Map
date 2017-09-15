@@ -98,7 +98,6 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         if self.appDelegate.locationsArray.count < 100 {
             getStudentLocations(skip: 100)
         } else {
-            print("posting notification")
             NotificationCenter.default.post(name: .updatedLocations, object: nil)
         }
     }

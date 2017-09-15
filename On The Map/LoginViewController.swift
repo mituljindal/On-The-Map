@@ -86,9 +86,6 @@ class LoginViewController: UIViewController {
                     if let registered = account["registered"] as? Bool {
                         if registered == true {
                             self.completeLogin()
-                        } else {
-                            self.presentAlert(title: "Account not found", error: "Incorrect username or password")
-                            return
                         }
                     }
                 }
