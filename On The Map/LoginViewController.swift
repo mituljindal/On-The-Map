@@ -31,67 +31,39 @@ class LoginViewController: UIViewController {
     @IBAction func loginButtonPressed(_ sender: Any) {
         hideKeyboard()
         
-        if emailTextField.text!.isEmpty {
-            presentAlert(title: "Try again!", error: "Please enter your email ID")
+        print("1")
+//        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+//        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        print("2")
+//        let email = emailTextField.text!.isEmpty
+//        if email.isValidEmail() {
+        if  emailTextField.text!.isEmpty {
+            presentAlert(title: "Try again!", error: "Please enter valid email ID")
         } else if passwordTextField.text!.isEmpty {
             presentAlert(title: "Try again!", error: "Please enter password")
         } else {
             setUI(false)
+            print("3")
             
             var request = URLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
             request.httpMethod = "POST"
             request.addValue("application/json", forHTTPHeaderField: "Accept")
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             request.httpBody = "{\"udacity\": {\"username\": \"\(emailTextField.text!)\", \"password\": \"\(passwordTextField.text!)\"}}".data(using: String.Encoding.utf8)
-            let session = URLSession.shared
-            let task = session.dataTask(with: request as URLRequest) {(data, response, error) in
-                
-                func displayError(_ error: String) {
-                    print(error)
-                    performUIUpdatesOnMain {
-                        self.setUI(true)
-                        self.presentAlert(title: "error", error: error)
-                    }
-                }
-                
-                guard (error == nil) else {
-                    displayError("There was an error with your request: \(error!)")
+            let _ = handleHttpRequest(request: request, skipData: 5) { (result, error) in
+                if let _ = error {
+                    self.setUI(true)
                     return
                 }
                 
-                guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                    displayError("Your request returned a status code other than 2xx!: ")
-                    return
-                }
-
-                guard let data = data else {
-                    displayError("No data was returned by the request!")
-                    return
-                }
-                
-                let range = Range(5..<data.count)
-                
-                let newData = data.subdata(in: range)
-                
-                let parsedResult: [String:AnyObject]!
-                
-                do {
-                    parsedResult = try JSONSerialization.jsonObject(with: newData, options: .allowFragments) as! [String:AnyObject]
-                } catch {
-                    displayError("Could not parse the data as JSON: '\(data)'")
-                    return
-                }
-                
-                if let account = parsedResult["account"] as? [String: AnyObject] {
+                if let account = result!["account"] as? [String: AnyObject] {
                     if let registered = account["registered"] as? Bool {
                         if registered == true {
                             self.completeLogin()
                         }
                     }
                 }
-                
             }
-            task.resume()
         }
     }
     
@@ -129,5 +101,13 @@ private extension LoginViewController {
         } else {
             loginButton.alpha = 0.5
         }
+    }
+}
+
+private extension String {
+    func isValidEmail() -> Bool {
+        // here, `try!` will always succeed because the pattern is valid
+        let regex = try! NSRegularExpression(pattern: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", options: .caseInsensitive)
+        return regex.firstMatch(in: self, options: [], range: NSRange(location: 0, length: characters.count)) != nil
     }
 }

@@ -32,7 +32,7 @@ class PostLocationViewController: UIViewController {
         bottomTextView.delegate = textViewDelegate
         bottomTextView.text = "Enter the location"
         topTextField.attributedPlaceholder = NSAttributedString(string: "Enter your social link",
-                                                                attributes: [NSForegroundColorAttributeName: UIColor.white])
+                                                                attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         topTextField.delegate = textFieldDelegate
         topView.backgroundColor = #colorLiteral(red: 0.9214684367, green: 0.921626389, blue: 0.9214583635, alpha: 1)
         bottomView.backgroundColor = #colorLiteral(red: 0.9214684367, green: 0.921626389, blue: 0.9214583635, alpha: 1)
@@ -111,6 +111,7 @@ extension PostLocationViewController {
         topTextView.isHidden = true
         bottomTextView.isHidden = true
         topTextField.isHidden = false
+        topTextField.isEnabled = true
         findButton.isHidden = true
         myMapView.isHidden = false
         submitButton.isHidden = false
@@ -125,35 +126,19 @@ extension PostLocationViewController {
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = "{\"uniqueKey\": \"748492837\", \"firstName\": \"Mitul\", \"lastName\": \"Jindal\",\"mapString\": \"\(locationString.lowercased())\", \"mediaURL\": \"\(topTextField.text ?? "www.google.com")\",\"latitude\": \(selectedPin?.coordinate.latitude ?? 0), \"longitude\": \(selectedPin?.coordinate.longitude ?? 0)}".data(using: String.Encoding.utf8)
-        let session = URLSession.shared
-        let task = session.dataTask(with: request as URLRequest) { data, response, error in
-            if error != nil { // Handle error…
+        let _ = handleHttpRequest(request: request as URLRequest, skipData: 0) { result, error in
+            if error != nil {
                 return
             }
             
-            guard let data = data else {
-                print("No data was returned by the request!")
+            guard let objectID = result!["objectId"] else {
+                performUIUpdatesOnMain {
+                    self.presentAlert(title: "Error Occuted", error: "No data was returned by the request!")
+                }
                 return
             }
-            
-            let parsedResult: [String:AnyObject]!
-            
-            do {
-                parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
-            } catch {
-                print("Could not parse the data as JSON: '\(data)'")
-                return
-            }
-            
-            guard let objectID = parsedResult["objectId"] else {
-                print("no object ID")
-                return
-            }
-            
-            print(NSString(data: data, encoding: String.Encoding.utf8.rawValue)!)
             self.postLocation(objectID as! String)
         }
-        task.resume()
     }
     
     func postLocation(_ objectID: String) {
@@ -165,14 +150,9 @@ extension PostLocationViewController {
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = "{\"uniqueKey\": \"748492837\", \"firstName\": \"Mitul\", \"lastName\": \"Jindal\",\"mapString\": \"\(locationString.lowercased())\", \"mediaURL\": \"\(topTextField.text ?? "www.google.com")\",\"latitude\": \(selectedPin?.coordinate.latitude ?? 0), \"longitude\": \(selectedPin?.coordinate.longitude ?? 0)}".data(using: String.Encoding.utf8)
-        let session = URLSession.shared
-        let task = session.dataTask(with: request as URLRequest) { data, response, error in
-            if error != nil { // Handle error…
-                return
-            }
-            print(NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!)
+        let _ = handleHttpRequest(request: request as URLRequest, skipData: 0) { _, _ in
+            
         }
-        task.resume()
     }
 }
 

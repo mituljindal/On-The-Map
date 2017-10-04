@@ -28,7 +28,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    func populate(notification: NSNotification) {
+    @objc func populate(notification: NSNotification) {
         self.locationsArray = appDelegate.locationsArray
         populateMap()
     }

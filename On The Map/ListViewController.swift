@@ -21,7 +21,7 @@ class ListViewController: UITableViewController {
         self.locationsArray = appDelegate.locationsArray
     }
     
-    func reload(notification: NSNotification) {
+    @objc func reload(notification: NSNotification) {
         self.locationsArray = appDelegate.locationsArray
         tableView.reloadData()
     }

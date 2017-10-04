@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -54,7 +58,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lt4-ZK-Y0X">
-                                <rect key="frame" x="244" y="368" width="66" height="31"/>
+                                <rect key="frame" x="244" y="368" width="62" height="31"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                 <state key="normal" title=" Sign Up">
                                     <color key="titleColor" red="0.088964188550000003" green="0.8271711652" blue="0.96216261390000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -90,7 +94,7 @@
                             <constraint firstItem="KXj-8j-ld3" firstAttribute="top" secondItem="Tcy-s4-fqT" secondAttribute="bottom" constant="57" id="s6n-2K-SZJ"/>
                             <constraint firstItem="9Au-gH-RBF" firstAttribute="top" secondItem="KXj-8j-ld3" secondAttribute="bottom" constant="19" id="trV-no-HHh"/>
                             <constraint firstAttribute="trailingMargin" secondItem="uPv-Bs-5gY" secondAttribute="trailing" constant="111" id="vhQ-jd-yCJ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Lt4-ZK-Y0X" secondAttribute="trailing" constant="49" id="yMn-O6-cuz"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Lt4-ZK-Y0X" secondAttribute="trailing" id="yMn-O6-cuz"/>
                         </constraints>
                     </view>
                     <connections>
@@ -376,7 +380,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pUI-wo-dJx">
-                                        <rect key="frame" x="118" y="381" width="138" height="40"/>
+                                        <rect key="frame" x="118" y="381" width="131" height="40"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="Find on the Map">
@@ -387,7 +391,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NTk-h2-Opw">
-                                        <rect key="frame" x="150" y="382" width="70" height="36"/>
+                                        <rect key="frame" x="150" y="382" width="62" height="36"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Submit"/>
@@ -409,11 +413,11 @@
                                     <constraint firstItem="NTk-h2-Opw" firstAttribute="leading" secondItem="9oB-21-Pj3" secondAttribute="leading" constant="150" id="brY-DJ-0ux"/>
                                     <constraint firstAttribute="bottom" secondItem="NTk-h2-Opw" secondAttribute="bottom" constant="53" id="cHs-qq-1K6"/>
                                     <constraint firstAttribute="trailing" secondItem="ecd-5B-Pz8" secondAttribute="trailing" id="cuc-cw-L3n"/>
-                                    <constraint firstAttribute="trailing" secondItem="NTk-h2-Opw" secondAttribute="trailing" constant="155" id="lb1-WF-3tO"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NTk-h2-Opw" secondAttribute="trailing" id="lb1-WF-3tO"/>
                                     <constraint firstItem="NTk-h2-Opw" firstAttribute="top" secondItem="ecd-5B-Pz8" secondAttribute="bottom" constant="37" id="mRH-kh-dVu"/>
                                     <constraint firstItem="ecd-5B-Pz8" firstAttribute="leading" secondItem="9oB-21-Pj3" secondAttribute="leading" id="qj8-gj-rbN"/>
                                     <constraint firstItem="pUI-wo-dJx" firstAttribute="top" secondItem="cw7-bP-bUc" secondAttribute="bottom" constant="-84" id="sbh-Ng-fiB"/>
-                                    <constraint firstAttribute="trailing" secondItem="pUI-wo-dJx" secondAttribute="trailing" constant="119" id="v2b-Fw-ERh"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pUI-wo-dJx" secondAttribute="trailing" id="v2b-Fw-ERh"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -451,7 +455,7 @@
                     <tabBarItem key="tabBarItem" title="Map" image="icon_mapview-deselected" id="KKp-mz-USp"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="lXd-e2-swx">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -470,7 +474,7 @@
                     <tabBarItem key="tabBarItem" title="List" image="icon_listview-deselected" id="C5n-Wl-s3F"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ipd-AE-K8I">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
