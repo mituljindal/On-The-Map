@@ -1,5 +1,5 @@
 //
-//  TextFieldDelegate.swift
+//  TextViewDelegate.swift
 //  On The Map
 //
 //  Created by mitul jindal on 15/09/17.
@@ -10,7 +10,7 @@ import UIKit
 
 class TextFieldDelegate: NSObject, UITextFieldDelegate {
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
@@ -19,4 +19,11 @@ class TextFieldDelegate: NSObject, UITextFieldDelegate {
         textField.resignFirstResponder()
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool{
+        if(string == "\n") {
+            textField.resignFirstResponder()
+            return false
+        }
+        return true
+    }
 }

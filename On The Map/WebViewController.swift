@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WebViewController: UIViewController {
+class WebViewController: UIViewController, UIWebViewDelegate {
     
     var urlString: String?
     
@@ -27,4 +27,17 @@ class WebViewController: UIViewController {
     @IBAction func done(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
+    func webViewDidStartLoad(_ webView: UIWebView) {
+        print("dzfbgdn")
+//        print(webView.request!.url!.absoluteString)
+    }
+    
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        print("finish")
+    }
 }
+
+//extension WebViewController: UIWebViewDelegate {
+//}
+

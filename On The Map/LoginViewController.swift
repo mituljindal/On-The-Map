@@ -31,10 +31,8 @@ class LoginViewController: UIViewController {
     @IBAction func loginButtonPressed(_ sender: Any) {
         hideKeyboard()
         
-        print("1")
 //        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
 //        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        print("2")
 //        let email = emailTextField.text!.isEmpty
 //        if email.isValidEmail() {
         if  emailTextField.text!.isEmpty {
@@ -43,7 +41,6 @@ class LoginViewController: UIViewController {
             presentAlert(title: "Try again!", error: "Please enter password")
         } else {
             setUI(false)
-            print("3")
             
             var request = URLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
             request.httpMethod = "POST"

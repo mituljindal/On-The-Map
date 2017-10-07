@@ -7,49 +7,21 @@
 //
 
 import UIKit
-import MapKit
 
 class PostLocationViewController: UIViewController {
     
-    @IBOutlet weak var topView: UIView!
-    @IBOutlet weak var bottomView: UIView!
-    @IBOutlet weak var topTextView: UITextView!
-    @IBOutlet weak var bottomTextView: UITextView!
-    @IBOutlet weak var myMapView: MKMapView!
-    @IBOutlet weak var submitButton: UIButton!
-    @IBOutlet weak var findButton: UIButton!
-    @IBOutlet weak var topTextField: UITextField!
-    @IBOutlet weak var cancelButton: UIButton!
     
-    var selectedPin:MKPlacemark? = nil
-    var textViewDelegate = TextViewDelegate()
+    @IBOutlet weak var locationTextField: UITextField!
+    @IBOutlet weak var socialLinkTextField: UITextField!
+    @IBOutlet weak var findLocationButton: UIButton!
+    
     var textFieldDelegate = TextFieldDelegate()
-    var locationString: String!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        bottomTextView.delegate = textViewDelegate
-        bottomTextView.text = "Enter the location"
-        topTextField.attributedPlaceholder = NSAttributedString(string: "Enter your social link",
-                                                                attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
-        topTextField.delegate = textFieldDelegate
-        topView.backgroundColor = #colorLiteral(red: 0.9214684367, green: 0.921626389, blue: 0.9214583635, alpha: 1)
-        bottomView.backgroundColor = #colorLiteral(red: 0.9214684367, green: 0.921626389, blue: 0.9214583635, alpha: 1)
-        topTextView.backgroundColor = #colorLiteral(red: 0.9214684367, green: 0.921626389, blue: 0.9214583635, alpha: 1)
-        topTextView.isHidden = false
-        bottomTextView.backgroundColor = #colorLiteral(red: 0.1677085161, green: 0.4406689107, blue: 0.7313830256, alpha: 1)
-        bottomTextView.isHidden = false
-        bottomTextView.textColor = UIColor.white
-        topTextField.isHidden = true
-        topTextField.textColor = UIColor.white
-//        topTextField.pl
-//        topTextField.placeholder = "Enter your social link"
-        findButton.isHidden = false
-        myMapView.isHidden = true
-        submitButton.isHidden = true
-        topTextView.isEditable = false
-//        cancelButton.titleColor(for: .normal) = #colorLiteral(red: 0.1677085161, green: 0.4406689107, blue: 0.7313830256, alpha: 1)
+        locationTextField.delegate = textFieldDelegate
+        socialLinkTextField.delegate = textFieldDelegate
     }
     
     @IBAction func cancelPressed(_ sender: Any) {
@@ -58,25 +30,27 @@ class PostLocationViewController: UIViewController {
     
     @IBAction func findPressed(_ sender: Any) {
         
-        guard  let searchQuery = bottomTextView.text else {
+        guard  let searchQuery = locationTextField.text else {
             presentAlert(title: "No Location", error: "Please enter location to search")
             return
         }
-        let request = MKLocalSearchRequest()
-        request.naturalLanguageQuery = searchQuery
         
-        let search = MKLocalSearch(request: request)
-        search.start(completionHandler: { response, error in
-            guard (error == nil) else {
-                updateMap {
-                    self.presentAlert(title: "Try again!", error: "An error occurred. Try a different location")
-                }
-                return
-            }
-            guard let response = response else { return }
-            self.updateUI()
-            self.dropPinZoomIn(placemark: response.mapItems[0].placemark)
-        })
+        
+//        let request = MKLocalSearchRequest()
+//        request.naturalLanguageQuery = searchQuery
+//
+//        let search = MKLocalSearch(request: request)
+//        search.start(completionHandler: { response, error in
+//            guard (error == nil) else {
+//                updateMap {
+//                    self.presentAlert(title: "Try again!", error: "An error occurred. Try a different location")
+//                }
+//                return
+//            }
+//            guard let response = response else { return }
+//            self.updateUI()
+//            self.dropPinZoomIn(placemark: response.mapItems[0].placemark)
+//        })
     }
     
     @IBAction func submitPressed(_ sender: Any) {
@@ -87,73 +61,61 @@ class PostLocationViewController: UIViewController {
 }
 
 extension PostLocationViewController {
-    func dropPinZoomIn(placemark:MKPlacemark){
-        // cache the pin
-        selectedPin = placemark
-        // clear existing pins
-        myMapView.removeAnnotations(myMapView.annotations)
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = placemark.coordinate
-        annotation.title = placemark.name
-        if let city = placemark.locality,
-            let state = placemark.administrativeArea {
-            locationString = "\(city), \(state)"
-            annotation.subtitle = locationString
-        }
-        myMapView.addAnnotation(annotation)
-        let span = MKCoordinateSpanMake(0.05, 0.05)
-        let region = MKCoordinateRegionMake(placemark.coordinate, span)
-        myMapView.setRegion(region, animated: true)
-    }
-    
-    func updateUI() {
-        topView.backgroundColor = #colorLiteral(red: 0.1677085161, green: 0.4406689107, blue: 0.7313830256, alpha: 1)
-        topTextView.isHidden = true
-        bottomTextView.isHidden = true
-        topTextField.isHidden = false
-        topTextField.isEnabled = true
-        findButton.isHidden = true
-        myMapView.isHidden = false
-        submitButton.isHidden = false
-        cancelButton.setTitleColor(.white, for: .normal)
-    }
+//    func dropPinZoomIn(placemark:MKPlacemark){
+//        // cache the pin
+//        selectedPin = placemark
+//        // clear existing pins
+//        myMapView.removeAnnotations(myMapView.annotations)
+//        let annotation = MKPointAnnotation()
+//        annotation.coordinate = placemark.coordinate
+//        annotation.title = placemark.name
+//        if let city = placemark.locality,
+//            let state = placemark.administrativeArea {
+//            locationString = "\(city), \(state)"
+//            annotation.subtitle = locationString
+//        }
+//        myMapView.addAnnotation(annotation)
+//        let span = MKCoordinateSpanMake(0.05, 0.05)
+//        let region = MKCoordinateRegionMake(placemark.coordinate, span)
+//        myMapView.setRegion(region, animated: true)
+//    }
     
     func getObjectID() {
         
-        let request = NSMutableURLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
-        request.httpMethod = "POST"
-        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
-        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = "{\"uniqueKey\": \"748492837\", \"firstName\": \"Mitul\", \"lastName\": \"Jindal\",\"mapString\": \"\(locationString.lowercased())\", \"mediaURL\": \"\(topTextField.text ?? "www.google.com")\",\"latitude\": \(selectedPin?.coordinate.latitude ?? 0), \"longitude\": \(selectedPin?.coordinate.longitude ?? 0)}".data(using: String.Encoding.utf8)
-        let _ = handleHttpRequest(request: request as URLRequest, skipData: 0) { result, error in
-            if error != nil {
-                return
-            }
-            
-            guard let objectID = result!["objectId"] else {
-                performUIUpdatesOnMain {
-                    self.presentAlert(title: "Error Occuted", error: "No data was returned by the request!")
-                }
-                return
-            }
-            self.postLocation(objectID as! String)
-        }
+//        let request = NSMutableURLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
+//        request.httpMethod = "POST"
+//        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
+//        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
+//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//        request.httpBody = "{\"uniqueKey\": \"748492837\", \"firstName\": \"Mitul\", \"lastName\": \"Jindal\",\"mapString\": \"\(locationString.lowercased())\", \"mediaURL\": \"\(topTextField.text ?? "www.google.com")\",\"latitude\": \(selectedPin?.coordinate.latitude ?? 0), \"longitude\": \(selectedPin?.coordinate.longitude ?? 0)}".data(using: String.Encoding.utf8)
+//        let _ = handleHttpRequest(request: request as URLRequest, skipData: 0) { result, error in
+//            if error != nil {
+//                return
+//            }
+//
+//            guard let objectID = result!["objectId"] else {
+//                performUIUpdatesOnMain {
+//                    self.presentAlert(title: "Error Occuted", error: "No data was returned by the request!")
+//                }
+//                return
+//            }
+//            self.postLocation(objectID as! String)
+//        }
     }
     
-    func postLocation(_ objectID: String) {
-        let urlString = "https://parse.udacity.com/parse/classes/StudentLocation/\(objectID)"
-        let url = URL(string: urlString)
-        let request = NSMutableURLRequest(url: url!)
-        request.httpMethod = "PUT"
-        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
-        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = "{\"uniqueKey\": \"748492837\", \"firstName\": \"Mitul\", \"lastName\": \"Jindal\",\"mapString\": \"\(locationString.lowercased())\", \"mediaURL\": \"\(topTextField.text ?? "www.google.com")\",\"latitude\": \(selectedPin?.coordinate.latitude ?? 0), \"longitude\": \(selectedPin?.coordinate.longitude ?? 0)}".data(using: String.Encoding.utf8)
-        let _ = handleHttpRequest(request: request as URLRequest, skipData: 0) { _, _ in
-            
-        }
-    }
+//    func postLocation(_ objectID: String) {
+//        let urlString = "https://parse.udacity.com/parse/classes/StudentLocation/\(objectID)"
+//        let url = URL(string: urlString)
+//        let request = NSMutableURLRequest(url: url!)
+//        request.httpMethod = "PUT"
+//        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
+//        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
+//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//        request.httpBody = "{\"uniqueKey\": \"748492837\", \"firstName\": \"Mitul\", \"lastName\": \"Jindal\",\"mapString\": \"\(locationString.lowercased())\", \"mediaURL\": \"\(topTextField.text ?? "www.google.com")\",\"latitude\": \(selectedPin?.coordinate.latitude ?? 0), \"longitude\": \(selectedPin?.coordinate.longitude ?? 0)}".data(using: String.Encoding.utf8)
+//        let _ = handleHttpRequest(request: request as URLRequest, skipData: 0) { _, _ in
+//            
+//        }
+//    }
 }
 
 //extension UITextViewDelegate {
