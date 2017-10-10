@@ -44,7 +44,7 @@ class PostLocationViewController: UIViewController {
         
         controller.searchQuery = searchQuery
         controller.socialLink = socialLink
-        present(controller, animated: true, completion: nil)
+        self.navigationController?.pushViewController(controller, animated: true)
     }
         
 //        let request = MKLocalSearchRequest()

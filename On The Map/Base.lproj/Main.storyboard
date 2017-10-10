@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gkH-99-Qn5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
@@ -334,7 +335,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -352,7 +353,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="mxc-rr-S3Z">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="pMd-6c-m00">
+                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="pMd-6c-m00">
                             <connections>
                                 <action selector="cancelPressed:" destination="AQH-Zs-AC6" id="YOR-Pc-ben"/>
                             </connections>
@@ -362,7 +363,6 @@
                         <outlet property="findLocationButton" destination="RFs-09-qPb" id="pJE-8n-6Ci"/>
                         <outlet property="locationTextField" destination="xMR-g6-6bo" id="M5N-29-sD4"/>
                         <outlet property="socialLinkTextField" destination="rAu-9v-bbW" id="9vq-4f-ywF"/>
-                        <segue destination="FBW-8Q-MDf" kind="show" identifier="showLocation" id="fzf-db-sND"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t5Z-3T-MO5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -402,6 +402,7 @@
                                 <connections>
                                     <action selector="findPressed:" destination="AQH-Zs-AC6" eventType="touchUpInside" id="wmH-N0-AOY"/>
                                     <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Mhk-p4-DMu"/>
+                                    <action selector="submitPressed:" destination="C2M-It-DmA" eventType="touchUpInside" id="eV0-Bx-Jrg"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -423,7 +424,16 @@
                             <constraint firstItem="Egz-Os-tco" firstAttribute="leading" secondItem="RxY-76-wtU" secondAttribute="leading" id="xp9-H9-Jm0"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="ZWS-m0-W1S"/>
+                    <navigationItem key="navigationItem" id="ZWS-m0-W1S">
+                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="jk9-5G-0yd">
+                            <connections>
+                                <action selector="cancelPressed:" destination="C2M-It-DmA" id="cDF-6g-AGJ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="myMapView" destination="Egz-Os-tco" id="JEK-Yz-3kU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xd6-D6-MQh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
