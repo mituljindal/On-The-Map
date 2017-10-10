@@ -35,6 +35,17 @@ class PostLocationViewController: UIViewController {
             return
         }
         
+        guard let socialLink = socialLinkTextField.text else {
+            presentAlert(title: "No Social Link", error: "Please enter your social link")
+            return
+        }
+        
+        let controller = storyboard?.instantiateViewController(withIdentifier: "showLocationViewController") as! ShowLocationViewController
+        
+        controller.searchQuery = searchQuery
+        controller.socialLink = socialLink
+        present(controller, animated: true, completion: nil)
+    }
         
 //        let request = MKLocalSearchRequest()
 //        request.naturalLanguageQuery = searchQuery
@@ -51,13 +62,12 @@ class PostLocationViewController: UIViewController {
 //            self.updateUI()
 //            self.dropPinZoomIn(placemark: response.mapItems[0].placemark)
 //        })
-    }
     
-    @IBAction func submitPressed(_ sender: Any) {
-        
-        self.getObjectID()
-        dismiss(animated: true, completion: nil)
-    }
+//    @IBAction func submitPressed(_ sender: Any) {
+//
+//        self.getObjectID()
+//        dismiss(animated: true, completion: nil)
+//    }
 }
 
 extension PostLocationViewController {
@@ -80,8 +90,8 @@ extension PostLocationViewController {
 //        myMapView.setRegion(region, animated: true)
 //    }
     
-    func getObjectID() {
-        
+//    func getObjectID() {
+    
 //        let request = NSMutableURLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
 //        request.httpMethod = "POST"
 //        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
@@ -101,7 +111,7 @@ extension PostLocationViewController {
 //            }
 //            self.postLocation(objectID as! String)
 //        }
-    }
+//    }
     
 //    func postLocation(_ objectID: String) {
 //        let urlString = "https://parse.udacity.com/parse/classes/StudentLocation/\(objectID)"
