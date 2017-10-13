@@ -74,24 +74,40 @@
 		AC62DFC21F55D5BD0014930F /* On The Map */ = {
 			isa = PBXGroup;
 			children = (
+				ACAAEAC21F8D128B00E3256A /* Helper */,
+				ACAAEAC11F8D125700E3256A /* ViewControllers */,
 				AC62DFC31F55D5BD0014930F /* AppDelegate.swift */,
-				AC62DFC51F55D5BD0014930F /* LoginViewController.swift */,
 				AC62DFC71F55D5BD0014930F /* Main.storyboard */,
 				AC62DFCA1F55D5BD0014930F /* Assets.xcassets */,
 				AC62DFCC1F55D5BD0014930F /* LaunchScreen.storyboard */,
 				AC62DFCF1F55D5BD0014930F /* Info.plist */,
-				AC08D5C91F64134C004FA9A8 /* GCDBlackBox.swift */,
-				AC08D5CF1F643A1D004FA9A8 /* WebViewController.swift */,
-				ACF64DFD1F653B63007AD337 /* MapViewController.swift */,
-				ACC2156B1F691B2D00F25CC2 /* TabBarViewController.swift */,
-				AC25FF7E1F69C9CF009DD9D5 /* ListViewController.swift */,
-				AC25FF821F69DFA5009DD9D5 /* UIViewControllerExtension.swift */,
-				AC0D608D1F6AC87900655AAB /* PostLocationViewController.swift */,
-				ACB004AC1F6BC53F003EB025 /* TextFieldDelegate.swift */,
-				ACF2E5E41F84B99F0095D73A /* Constants.swift */,
-				AC41BE661F88EFED00E63497 /* ShowLocationViewController.swift */,
 			);
 			path = "On The Map";
+			sourceTree = "<group>";
+		};
+		ACAAEAC11F8D125700E3256A /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				ACC2156B1F691B2D00F25CC2 /* TabBarViewController.swift */,
+				AC41BE661F88EFED00E63497 /* ShowLocationViewController.swift */,
+				AC62DFC51F55D5BD0014930F /* LoginViewController.swift */,
+				AC0D608D1F6AC87900655AAB /* PostLocationViewController.swift */,
+				ACF64DFD1F653B63007AD337 /* MapViewController.swift */,
+				AC25FF7E1F69C9CF009DD9D5 /* ListViewController.swift */,
+				AC08D5CF1F643A1D004FA9A8 /* WebViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		ACAAEAC21F8D128B00E3256A /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				ACB004AC1F6BC53F003EB025 /* TextFieldDelegate.swift */,
+				ACF2E5E41F84B99F0095D73A /* Constants.swift */,
+				AC08D5C91F64134C004FA9A8 /* GCDBlackBox.swift */,
+				AC25FF821F69DFA5009DD9D5 /* UIViewControllerExtension.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

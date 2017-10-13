@@ -42,10 +42,10 @@ class LoginViewController: UIViewController {
         } else {
             setUI(false)
             
-            var request = URLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
+            var request = URLRequest(url: URL(string: URLs.login)!)
             request.httpMethod = "POST"
-            request.addValue("application/json", forHTTPHeaderField: "Accept")
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: RequestKeys.accept)
+            request.addValue("application/json", forHTTPHeaderField: RequestKeys.contentType)
             request.httpBody = "{\"udacity\": {\"username\": \"\(emailTextField.text!)\", \"password\": \"\(passwordTextField.text!)\"}}".data(using: String.Encoding.utf8)
             let _ = handleHttpRequest(request: request, skipData: 5) { (result, error) in
                 if let _ = error {
@@ -98,13 +98,5 @@ private extension LoginViewController {
         } else {
             loginButton.alpha = 0.5
         }
-    }
-}
-
-private extension String {
-    func isValidEmail() -> Bool {
-        // here, `try!` will always succeed because the pattern is valid
-        let regex = try! NSRegularExpression(pattern: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", options: .caseInsensitive)
-        return regex.firstMatch(in: self, options: [], range: NSRange(location: 0, length: characters.count)) != nil
     }
 }

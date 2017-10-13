@@ -20,14 +20,14 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         
         self.locationsArray = nil
         
-        var urlString = "https://parse.udacity.com/parse/classes/StudentLocation"
+        var urlString = URLs.studentLocations
         if skip != 0 {
             urlString.append("?skip=\(skip)")
         }
         var request = URLRequest(url: URL(string: urlString)!)
         request.httpMethod = "GET"
-        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
-        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
+        request.addValue(RequestValues.XParseAppID, forHTTPHeaderField: RequestKeys.XParseAppID)
+        request.addValue(RequestValues.XParseRestApi, forHTTPHeaderField: RequestKeys.XParseRestApi)
         let _ = handleHttpRequest(request: request, skipData: 0) { result, error in
             
             if error != nil {
@@ -81,7 +81,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     }
     
     func logout() {
-        let request = NSMutableURLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
+        let request = NSMutableURLRequest(url: URL(string: URLs.logout)!)
         request.httpMethod = "DELETE"
         var xsrfCookie: HTTPCookie? = nil
         let sharedCookieStorage = HTTPCookieStorage.shared
