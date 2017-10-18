@@ -28,7 +28,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         request.httpMethod = "GET"
         request.addValue(RequestValues.XParseAppID, forHTTPHeaderField: RequestKeys.XParseAppID)
         request.addValue(RequestValues.XParseRestApi, forHTTPHeaderField: RequestKeys.XParseRestApi)
-        let _ = handleHttpRequest(request: request, skipData: 0) { result, error in
+        let _ = UdacityClient.sharedInstance().handleHttpRequest(request: request, skipData: 0) { result, error in
             
             if error != nil {
                 return
@@ -91,7 +91,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         if let xsrfCookie = xsrfCookie {
             request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
         }
-        let _ = handleHttpRequest(request: request as URLRequest, skipData: 5) { (result, error) in
+        let _ = UdacityClient.sharedInstance().handleHttpRequest(request: request as URLRequest, skipData: 5) { (result, error) in
             
             if error != nil {
                 return

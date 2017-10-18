@@ -85,7 +85,7 @@ extension ShowLocationViewController {
         request.addValue(RequestValues.XParseRestApi, forHTTPHeaderField: RequestKeys.XParseRestApi)
         request.addValue(RequestValues.contentType, forHTTPHeaderField: RequestKeys.contentType)
         request.httpBody = "{\"uniqueKey\": \"748492837\", \"firstName\": \"Mitul\", \"lastName\": \"Jindal\",\"mapString\": \"\(locationString!.lowercased() )\", \"mediaURL\": \"\(socialLink!)\",\"latitude\": \(selectedPin?.coordinate.latitude ?? 0), \"longitude\": \(selectedPin?.coordinate.longitude ?? 0)}".data(using: String.Encoding.utf8)
-        let _ = handleHttpRequest(request: request as URLRequest, skipData: 0) { result, error in
+        let _ = UdacityClient.sharedInstance().handleHttpRequest(request: request as URLRequest, skipData: 0) { result, error in
             if error != nil {
                 self.presentAlert(title: "Oops", error: "An error occured, please try again!")
                 return
@@ -109,7 +109,7 @@ extension ShowLocationViewController {
         request.addValue(RequestValues.contentType, forHTTPHeaderField: RequestKeys.contentType)
         request.httpBody = "{\"uniqueKey\": \"748492837\", \"firstName\": \"Mitul\", \"lastName\": \"Jindal\",\"mapString\": \"\(locationString.lowercased())\", \"mediaURL\": \"\(socialLink ?? "www.google.com")\",\"latitude\": \(selectedPin?.coordinate.latitude ?? 0), \"longitude\": \(selectedPin?.coordinate.longitude ?? 0)}".data(using: String.Encoding.utf8)
         
-        let _ = handleHttpRequest(request: request as URLRequest, skipData: 0) { _, error in
+        let _ = UdacityClient.sharedInstance().handleHttpRequest(request: request as URLRequest, skipData: 0) { _, error in
             if error != nil {
                 self.presentAlert(title: "Oops", error: "An error occured, please try again!")
                 return

@@ -12,6 +12,7 @@
 		AC0D608E1F6AC87900655AAB /* PostLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0D608D1F6AC87900655AAB /* PostLocationViewController.swift */; };
 		AC25FF7F1F69C9CF009DD9D5 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC25FF7E1F69C9CF009DD9D5 /* ListViewController.swift */; };
 		AC25FF831F69DFA5009DD9D5 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC25FF821F69DFA5009DD9D5 /* UIViewControllerExtension.swift */; };
+		AC289AAE1F97E5AF00786D3D /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC289AAD1F97E5AE00786D3D /* UdacityClient.swift */; };
 		AC41BE671F88EFED00E63497 /* ShowLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC41BE661F88EFED00E63497 /* ShowLocationViewController.swift */; };
 		AC62DFC41F55D5BD0014930F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC62DFC31F55D5BD0014930F /* AppDelegate.swift */; };
 		AC62DFC61F55D5BD0014930F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC62DFC51F55D5BD0014930F /* LoginViewController.swift */; };
@@ -30,6 +31,7 @@
 		AC0D608D1F6AC87900655AAB /* PostLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostLocationViewController.swift; sourceTree = "<group>"; };
 		AC25FF7E1F69C9CF009DD9D5 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		AC25FF821F69DFA5009DD9D5 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		AC289AAD1F97E5AE00786D3D /* UdacityClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
 		AC41BE661F88EFED00E63497 /* ShowLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowLocationViewController.swift; sourceTree = "<group>"; };
 		AC62DFC01F55D5BD0014930F /* On The Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "On The Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC62DFC31F55D5BD0014930F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				ACF2E5E41F84B99F0095D73A /* Constants.swift */,
 				AC08D5C91F64134C004FA9A8 /* GCDBlackBox.swift */,
 				AC25FF821F69DFA5009DD9D5 /* UIViewControllerExtension.swift */,
+				AC289AAD1F97E5AE00786D3D /* UdacityClient.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -184,6 +187,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC289AAE1F97E5AF00786D3D /* UdacityClient.swift in Sources */,
 				AC41BE671F88EFED00E63497 /* ShowLocationViewController.swift in Sources */,
 				ACF64DFE1F653B63007AD337 /* MapViewController.swift in Sources */,
 				AC08D5CA1F64134C004FA9A8 /* GCDBlackBox.swift in Sources */,
@@ -268,7 +272,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -319,7 +323,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

@@ -47,7 +47,7 @@ class LoginViewController: UIViewController {
             request.addValue("application/json", forHTTPHeaderField: RequestKeys.accept)
             request.addValue("application/json", forHTTPHeaderField: RequestKeys.contentType)
             request.httpBody = "{\"udacity\": {\"username\": \"\(emailTextField.text!)\", \"password\": \"\(passwordTextField.text!)\"}}".data(using: String.Encoding.utf8)
-            let _ = handleHttpRequest(request: request, skipData: 5) { (result, error) in
+            let _ = UdacityClient.sharedInstance().handleHttpRequest(request: request, skipData: 5) { (result, error) in
                 if let _ = error {
                     self.setUI(true)
                     return
