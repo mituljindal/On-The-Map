@@ -15,6 +15,7 @@ class ShowLocationViewController: UIViewController {
     var socialLink: String!
     var selectedPin: MKPlacemark? = nil
     var locationString: String!
+    var appDelegate = UIApplication.shared.delegate as! AppDelegate
     @IBOutlet weak var myMapView: MKMapView!
     
     override func viewDidLoad() {
@@ -84,7 +85,7 @@ extension ShowLocationViewController {
         request.addValue(RequestValues.XParseAppID, forHTTPHeaderField: RequestKeys.XParseAppID)
         request.addValue(RequestValues.XParseRestApi, forHTTPHeaderField: RequestKeys.XParseRestApi)
         request.addValue(RequestValues.contentType, forHTTPHeaderField: RequestKeys.contentType)
-        request.httpBody = "{\"uniqueKey\": \"748492837\", \"firstName\": \"Mitul\", \"lastName\": \"Jindal\",\"mapString\": \"\(locationString!.lowercased() )\", \"mediaURL\": \"\(socialLink!)\",\"latitude\": \(selectedPin?.coordinate.latitude ?? 0), \"longitude\": \(selectedPin?.coordinate.longitude ?? 0)}".data(using: String.Encoding.utf8)
+        request.httpBody = "{\"uniqueKey\": \"748492837\", \"firstName\": \"\(self.appDelegate.firstName ?? "John")\", \"lastName\": \"\(self.appDelegate.lastName ?? "Doe")\",\"mapString\": \"\(locationString!.lowercased() )\", \"mediaURL\": \"\(socialLink!)\",\"latitude\": \(selectedPin?.coordinate.latitude ?? 0), \"longitude\": \(selectedPin?.coordinate.longitude ?? 0)}".data(using: String.Encoding.utf8)
         let _ = UdacityClient.sharedInstance().handleHttpRequest(request: request as URLRequest, skipData: 0) { result, error in
             if error != nil {
                 self.presentAlert(title: "Oops", error: "An error occured, please try again!")
@@ -107,7 +108,7 @@ extension ShowLocationViewController {
         request.addValue(RequestValues.XParseAppID, forHTTPHeaderField: RequestKeys.XParseAppID)
         request.addValue(RequestValues.XParseRestApi, forHTTPHeaderField: RequestKeys.XParseRestApi)
         request.addValue(RequestValues.contentType, forHTTPHeaderField: RequestKeys.contentType)
-        request.httpBody = "{\"uniqueKey\": \"748492837\", \"firstName\": \"Mitul\", \"lastName\": \"Jindal\",\"mapString\": \"\(locationString.lowercased())\", \"mediaURL\": \"\(socialLink ?? "www.google.com")\",\"latitude\": \(selectedPin?.coordinate.latitude ?? 0), \"longitude\": \(selectedPin?.coordinate.longitude ?? 0)}".data(using: String.Encoding.utf8)
+        request.httpBody = "{\"uniqueKey\": \"748492837\", \"firstName\": \"\(self.appDelegate.firstName ?? "John")\", \"lastName\": \"\(self.appDelegate.lastName ?? "Doe")\",\"mapString\": \"\(locationString!.lowercased() )\", \"mediaURL\": \"\(socialLink!)\",\"latitude\": \(selectedPin?.coordinate.latitude ?? 0), \"longitude\": \(selectedPin?.coordinate.longitude ?? 0)}".data(using: String.Encoding.utf8)
         
         let _ = UdacityClient.sharedInstance().handleHttpRequest(request: request as URLRequest, skipData: 0) { _, error in
             if error != nil {

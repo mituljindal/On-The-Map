@@ -15,6 +15,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     
+    var appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -41,7 +43,6 @@ class LoginViewController: UIViewController {
             presentAlert(title: "Try again!", error: "Please enter password")
         } else {
             setUI(false)
-            
             var request = URLRequest(url: URL(string: URLs.login)!)
             request.httpMethod = "POST"
             request.addValue("application/json", forHTTPHeaderField: RequestKeys.accept)
@@ -49,6 +50,7 @@ class LoginViewController: UIViewController {
             request.httpBody = "{\"udacity\": {\"username\": \"\(emailTextField.text!)\", \"password\": \"\(passwordTextField.text!)\"}}".data(using: String.Encoding.utf8)
             let _ = UdacityClient.sharedInstance().handleHttpRequest(request: request, skipData: 5) { (result, error) in
                 if let _ = error {
+                    self.presentAlert(title: "Oops an error occurred", error: "Please try again")
                     self.setUI(true)
                     return
                 }
@@ -56,7 +58,9 @@ class LoginViewController: UIViewController {
                 if let account = result!["account"] as? [String: AnyObject] {
                     if let registered = account["registered"] as? Bool {
                         if registered == true {
-                            self.completeLogin()
+                            if let id = account["key"] as? String {
+                                self.getUserInfo(id)
+                            }
                         }
                     }
                 }
@@ -64,8 +68,31 @@ class LoginViewController: UIViewController {
         }
     }
     
-    func completeLogin() {
+    func getUserInfo(_ id: String) {
         
+        var request = URLRequest(url: URL(string: URLs.getAccountInfo + id)!)
+        request.httpMethod = "GET"
+        let _ = UdacityClient.sharedInstance().handleHttpRequest(request: request, skipData: 5) { (result, error) in
+            if let _ = error {
+                self.presentAlert(title: "Oops an error occurred", error: "Please try again")
+                self.setUI(true)
+                return
+            }
+            
+            if let user = result!["user"] as? [String: AnyObject] {
+                if let lastName = user["last_name"] as? String {
+                    print(lastName)
+                    self.appDelegate.lastName = lastName
+                }
+                if let firstName = user["first_name"] as? String {
+                    self.appDelegate.firstName = firstName
+                }
+            }
+            self.completeLogin()
+        }
+    }
+    
+    func completeLogin() {
         let controller = storyboard?.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
         self.present(controller, animated: true, completion: nil)
     }

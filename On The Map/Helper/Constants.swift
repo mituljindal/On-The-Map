@@ -14,6 +14,7 @@ struct URLs {
     static let objectID = "https://parse.udacity.com/parse/classes/StudentLocation"
     static let postLocation = "https://parse.udacity.com/parse/classes/StudentLocation/"
     static let login = "https://www.udacity.com/api/session"
+    static let getAccountInfo = "https://www.udacity.com/api/users/"
 }
 
 struct RequestKeys {
