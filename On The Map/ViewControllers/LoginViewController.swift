@@ -58,15 +58,21 @@ class LoginViewController: UIViewController {
             let _ = UdacityClient.sharedInstance().handleHttpRequest(request: request, skipData: 5) { (result, error) in
                 
                 func handleError() {
-                    self.presentAlert(title: "Account not found", error: "Please check email ID and password")
-                    self.setUI(true)
-                    self.activityIndicator.stopAnimating()
+                    performUIUpdatesOnMain {
+                        self.presentAlert(title: "Account not found", error: "Please check email ID and password")
+                        self.setUI(true)
+                        self.activityIndicator.stopAnimating()
+                    }
+                    
 //                    self.activityIndicator.isHidden = true
                 }
                 if let _ = error {
-                    self.presentAlert(title: "Oops an error occurred", error: "Please try again")
-                    self.setUI(true)
-                    self.activityIndicator.stopAnimating()
+                    performUIUpdatesOnMain {
+                        self.presentAlert(title: "Oops an error occurred", error: "Please try again")
+                        self.setUI(true)
+                        self.activityIndicator.stopAnimating()
+                    }
+                    
                     return
                 }
                 
@@ -98,9 +104,11 @@ class LoginViewController: UIViewController {
         request.httpMethod = "GET"
         let _ = UdacityClient.sharedInstance().handleHttpRequest(request: request, skipData: 5) { (result, error) in
             if let _ = error {
-                self.presentAlert(title: "Oops an error occurred", error: "Please try again")
-                self.setUI(true)
-                self.activityIndicator.stopAnimating()
+                performUIUpdatesOnMain {
+                    self.presentAlert(title: "Oops an error occurred", error: "Please try again")
+                    self.setUI(true)
+                    self.activityIndicator.stopAnimating()
+                }
                 return
             }
             
@@ -113,8 +121,10 @@ class LoginViewController: UIViewController {
                     self.appDelegate.firstName = firstName
                 }
             }
-            self.activityIndicator.stopAnimating()
-            self.completeLogin()
+            performUIUpdatesOnMain {
+                self.activityIndicator.stopAnimating()
+                self.completeLogin()
+            }
         }
     }
     

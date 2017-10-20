@@ -52,14 +52,15 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 last = dictionary["lastName"] as? String
             }
             if let _ = dictionary["mediaURL"] {
-                mediaURL = dictionary["mediaURL"] as! String
+                mediaURL = dictionary["mediaURL"] as? String
             }
             
             let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
             annotation.title = "\(first!) \(last!)"
-            annotation.subtitle = mediaURL!
-            
+            if mediaURL != nil {
+                annotation.subtitle = mediaURL!
+            }
             annotations.append(annotation)
         }
         mapView.addAnnotations(annotations)
@@ -85,9 +86,16 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        print("1")
         if control == view.rightCalloutAccessoryView {
+            print("2")
             if let urlString = view.annotation?.subtitle {
-                loadWebView(urlString!)
+                print("3")
+                guard let url = URL(string: urlString!) else {return}
+                print("4")
+                print(url)
+                UIApplication.shared.open(url, options: [:])
+                print("5")
             }
         }
     }

@@ -41,11 +41,13 @@ class ListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var controller: WebViewController
-        controller = self.storyboard?.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
-        
-        controller.urlString = (self.locationsArray[indexPath.row])["mediaURL"] as? String
-        present(controller, animated: true, completion: nil)
+        guard let url = URL(string:(self.locationsArray[indexPath.row])["mediaURL"] as! String) else {return}
+        UIApplication.shared.open(url, options: [:])
+//        var controller: WebViewController
+//        controller = self.storyboard?.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
+//
+//        controller.urlString = (self.locationsArray[indexPath.row])["mediaURL"] as? String
+//        present(controller, animated: true, completion: nil)
     }
     
     @IBAction func logout(_ sender: Any) {

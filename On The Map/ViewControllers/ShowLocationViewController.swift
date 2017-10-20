@@ -47,7 +47,9 @@ class ShowLocationViewController: UIViewController {
             }
             guard let response = response else { return }
             self.dropPinZoomIn(placemark: response.mapItems[0].placemark)
-            self.activityIndicator.stopAnimating()
+            performUIUpdatesOnMain {
+                self.activityIndicator.stopAnimating()
+            }
         })
     }
     
