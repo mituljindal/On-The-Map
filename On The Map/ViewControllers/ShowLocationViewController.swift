@@ -18,13 +18,21 @@ class ShowLocationViewController: UIViewController {
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
     @IBOutlet weak var myMapView: MKMapView!
     
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.center = self.view.center
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        self.view.addSubview(activityIndicator)
         
         self.search()
     }
     
     func search() {
+        activityIndicator.startAnimating()
         let request = MKLocalSearchRequest()
         request.naturalLanguageQuery = searchQuery
     
@@ -32,12 +40,14 @@ class ShowLocationViewController: UIViewController {
         search.start(completionHandler: { response, error in
             guard (error == nil) else {
                 updateMap {
+                    self.activityIndicator.stopAnimating()
                     self.presentAlert(title: "Try again!", error: "An error occurred. Try a different location")
                 }
                 return
             }
             guard let response = response else { return }
             self.dropPinZoomIn(placemark: response.mapItems[0].placemark)
+            self.activityIndicator.stopAnimating()
         })
     }
     
@@ -93,6 +103,7 @@ extension ShowLocationViewController {
             }
             
             guard let objectID = result!["objectId"] else {
+                self.presentAlert(title: "Oops", error: "An error occured, please try again!")
                 return
             }
             

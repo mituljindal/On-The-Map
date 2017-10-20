@@ -15,7 +15,7 @@ class UdacityClient {
         func handlerError(error: String) {
             performUIUpdatesOnMain {
                 completion(nil, error)
-                return
+//                return
             }
         }
         

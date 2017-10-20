@@ -15,11 +15,17 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.center = self.view.center
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        self.view.addSubview(activityIndicator)
         setUI(true)
     }
     
@@ -32,6 +38,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginButtonPressed(_ sender: Any) {
         hideKeyboard()
+        activityIndicator.startAnimating()
         
 //        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
 //        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
@@ -49,9 +56,17 @@ class LoginViewController: UIViewController {
             request.addValue("application/json", forHTTPHeaderField: RequestKeys.contentType)
             request.httpBody = "{\"udacity\": {\"username\": \"\(emailTextField.text!)\", \"password\": \"\(passwordTextField.text!)\"}}".data(using: String.Encoding.utf8)
             let _ = UdacityClient.sharedInstance().handleHttpRequest(request: request, skipData: 5) { (result, error) in
+                
+                func handleError() {
+                    self.presentAlert(title: "Account not found", error: "Please check email ID and password")
+                    self.setUI(true)
+                    self.activityIndicator.stopAnimating()
+//                    self.activityIndicator.isHidden = true
+                }
                 if let _ = error {
                     self.presentAlert(title: "Oops an error occurred", error: "Please try again")
                     self.setUI(true)
+                    self.activityIndicator.stopAnimating()
                     return
                 }
                 
@@ -60,9 +75,18 @@ class LoginViewController: UIViewController {
                         if registered == true {
                             if let id = account["key"] as? String {
                                 self.getUserInfo(id)
+                            } else {handleError()
+                                return
                             }
+                        } else {handleError()
+                            return
                         }
+                    } else {handleError()
+                        return
                     }
+                } else {
+                    handleError()
+                    return
                 }
             }
         }
@@ -76,6 +100,7 @@ class LoginViewController: UIViewController {
             if let _ = error {
                 self.presentAlert(title: "Oops an error occurred", error: "Please try again")
                 self.setUI(true)
+                self.activityIndicator.stopAnimating()
                 return
             }
             
@@ -88,6 +113,7 @@ class LoginViewController: UIViewController {
                     self.appDelegate.firstName = firstName
                 }
             }
+            self.activityIndicator.stopAnimating()
             self.completeLogin()
         }
     }
