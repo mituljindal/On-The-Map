@@ -11,7 +11,7 @@ import UIKit
 class ListViewController: UITableViewController {
 
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    var locationsArray: [[String: AnyObject]]!
+    var locationsArray: [studentInformation]!
 
     
     override func viewDidLoad() {
@@ -34,20 +34,15 @@ class ListViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell")!
         let location = self.locationsArray[indexPath.row]
         
-        cell.textLabel?.text = "\(location["firstName"] ?? "No First Name" as AnyObject) \(location["lastName"] ?? "No Last Name" as AnyObject)"
+        cell.textLabel?.text = "\(location.firstName) \(location.lastName)"
         cell.imageView?.image = #imageLiteral(resourceName: "icon_pin")
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let url = URL(string:(self.locationsArray[indexPath.row])["mediaURL"] as! String) else {return}
+        guard let url = URL(string:(self.locationsArray[indexPath.row]).mediaURL) else {return}
         UIApplication.shared.open(url, options: [:])
-//        var controller: WebViewController
-//        controller = self.storyboard?.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
-//
-//        controller.urlString = (self.locationsArray[indexPath.row])["mediaURL"] as? String
-//        present(controller, animated: true, completion: nil)
     }
     
     @IBAction func logout(_ sender: Any) {

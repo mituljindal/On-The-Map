@@ -9,7 +9,7 @@
 import Foundation
 
 struct URLs {
-    static let studentLocations = "https://parse.udacity.com/parse/classes/StudentLocation?limit=100"
+    static let studentLocations = "https://parse.udacity.com/parse/classes/StudentLocation?limit=100&order=-updatedAt"
     static let logout = "https://www.udacity.com/api/session"
     static let objectID = "https://parse.udacity.com/parse/classes/StudentLocation"
     static let postLocation = "https://parse.udacity.com/parse/classes/StudentLocation/"

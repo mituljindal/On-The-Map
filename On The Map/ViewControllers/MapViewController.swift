@@ -15,7 +15,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
     var annotations = [MKPointAnnotation]()
-    var locationsArray: [[String: AnyObject]]!
+    var locationsArray: [studentInformation]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(populate(notification:)), name: .updatedLocations, object: nil)
         
         updateMap {
-            (self.tabBarController as? TabBarViewController)?.getStudentLocations(skip: 0)
+            (self.tabBarController as? TabBarViewController)?.getStudentLocations()
         }
     }
     
@@ -37,30 +37,15 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
         for dictionary in self.locationsArray {
             
-            let lat = CLLocationDegrees(dictionary["latitude"] as! Double)
-            let long = CLLocationDegrees(dictionary["longitude"] as! Double)
+            let lat = CLLocationDegrees(dictionary.latitude)
+            let long = CLLocationDegrees(dictionary.longitude)
             
             let coordinate = CLLocationCoordinate2DMake(lat, long)
-            var first: String! = ""
-            var last: String! = ""
-            var mediaURL: String! = ""
-            
-            if let _ = dictionary["firstName"] {
-                first = dictionary["firstName"] as? String
-            }
-            if let _ = dictionary["lastName"] {
-                last = dictionary["lastName"] as? String
-            }
-            if let _ = dictionary["mediaURL"] {
-                mediaURL = dictionary["mediaURL"] as? String
-            }
             
             let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
-            annotation.title = "\(first!) \(last!)"
-            if mediaURL != nil {
-                annotation.subtitle = mediaURL!
-            }
+            annotation.title = "\(dictionary.firstName) \(dictionary.lastName)"
+            annotation.subtitle = dictionary.mediaURL
             annotations.append(annotation)
         }
         mapView.addAnnotations(annotations)
@@ -86,16 +71,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        print("1")
         if control == view.rightCalloutAccessoryView {
-            print("2")
             if let urlString = view.annotation?.subtitle {
-                print("3")
                 guard let url = URL(string: urlString!) else {return}
-                print("4")
-                print(url)
                 UIApplication.shared.open(url, options: [:])
-                print("5")
             }
         }
     }

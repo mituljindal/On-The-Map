@@ -38,24 +38,14 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginButtonPressed(_ sender: Any) {
         hideKeyboard()
-        activityIndicator.startAnimating()
-        
-//        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
-//        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-//        let email = emailTextField.text!.isEmpty
-//        if email.isValidEmail() {
         if  emailTextField.text!.isEmpty {
             presentAlert(title: "Try again!", error: "Please enter valid email ID")
         } else if passwordTextField.text!.isEmpty {
             presentAlert(title: "Try again!", error: "Please enter password")
         } else {
             setUI(false)
-            var request = URLRequest(url: URL(string: URLs.login)!)
-            request.httpMethod = "POST"
-            request.addValue("application/json", forHTTPHeaderField: RequestKeys.accept)
-            request.addValue("application/json", forHTTPHeaderField: RequestKeys.contentType)
-            request.httpBody = "{\"udacity\": {\"username\": \"\(emailTextField.text!)\", \"password\": \"\(passwordTextField.text!)\"}}".data(using: String.Encoding.utf8)
-            let _ = UdacityClient.sharedInstance().handleHttpRequest(request: request, skipData: 5) { (result, error) in
+            activityIndicator.startAnimating()
+            UdacityClient.sharedInstance().login(username: emailTextField.text!, password: passwordTextField.text!) { (result, error) in
                 
                 func handleError() {
                     performUIUpdatesOnMain {
@@ -76,49 +66,9 @@ class LoginViewController: UIViewController {
                     return
                 }
                 
-                if let account = result!["account"] as? [String: AnyObject] {
-                    if let registered = account["registered"] as? Bool {
-                        if registered == true {
-                            if let id = account["key"] as? String {
-                                self.getUserInfo(id)
-                            } else {handleError()
-                                return
-                            }
-                        } else {handleError()
-                            return
-                        }
-                    } else {handleError()
-                        return
-                    }
-                } else {
-                    handleError()
-                    return
-                }
-            }
-        }
-    }
-    
-    func getUserInfo(_ id: String) {
-        
-        var request = URLRequest(url: URL(string: URLs.getAccountInfo + id)!)
-        request.httpMethod = "GET"
-        let _ = UdacityClient.sharedInstance().handleHttpRequest(request: request, skipData: 5) { (result, error) in
-            if let _ = error {
-                performUIUpdatesOnMain {
-                    self.presentAlert(title: "Oops an error occurred", error: "Please try again")
-                    self.setUI(true)
-                    self.activityIndicator.stopAnimating()
-                }
-                return
-            }
-            
-            if let user = result!["user"] as? [String: AnyObject] {
-                if let lastName = user["last_name"] as? String {
-                    print(lastName)
-                    self.appDelegate.lastName = lastName
-                }
-                if let firstName = user["first_name"] as? String {
-                    self.appDelegate.firstName = firstName
+                if let user = result {
+                    self.appDelegate.lastName = user["lastName"]
+                    self.appDelegate.firstName = user["firstName"]
                 }
             }
             performUIUpdatesOnMain {

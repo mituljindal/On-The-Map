@@ -12,18 +12,13 @@ import MapKit
 class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
-    var locationsArray: [[String: AnyObject]]!
+    var locationsArray: [studentInformation]! = []
     let map = MapViewController()
     let list = ListViewController()
     
-    func getStudentLocations(skip: Int) {
+    func getStudentLocations() {
         
-        self.locationsArray = nil
-        
-        var urlString = URLs.studentLocations
-        if skip != 0 {
-            urlString.append("?skip=\(skip)")
-        }
+        let urlString = URLs.studentLocations
         var request = URLRequest(url: URL(string: urlString)!)
         request.httpMethod = "GET"
         request.addValue(RequestValues.XParseAppID, forHTTPHeaderField: RequestKeys.XParseAppID)
@@ -31,53 +26,24 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         let _ = UdacityClient.sharedInstance().handleHttpRequest(request: request, skipData: 0) { result, error in
             
             if error != nil {
+                performUIUpdatesOnMain {
+                    self.presentAlert(title: "Oops an error occured", error: "Please press refresh")
+                }
                 return
             }
             
-            if let arr = result!["results"] {
-                self.locationsArray = arr as! [[String : AnyObject]]
-            }
-            self.populateArray()
-        }
-    }
-    
-    func populateArray() {
-        
-        for dictionary in self.locationsArray {
-        
-            if let latitude = dictionary["latitude"] {
-                if latitude is NSNull {
-                    continue
-                } else {
-                    if let longitude = dictionary["longitude"] {
-                        if longitude is NSNull {
-                            continue
-                        }
-                    } else  { continue }
+            if let arr = result!["results"] as? [[String: AnyObject]] {
+                for location in arr {
+                    self.appDelegate.locationsArray.append(studentInformation(location))
                 }
-            } else { continue }
-        
-            if let _ = dictionary["mediaURL"] {
-            } else {
-                continue
+                NotificationCenter.default.post(name: .updatedLocations, object: nil)
             }
-            
-            self.appDelegate.locationsArray.append(dictionary)
-            if self.appDelegate.locationsArray.count == 100 {
-                break
-            }
-        }
-        
-        if self.appDelegate.locationsArray.count < 100 {
-            getStudentLocations(skip: 100)
-        } else {
-            NotificationCenter.default.post(name: .updatedLocations, object: nil)
         }
     }
     
     func refresh() {
         self.appDelegate.locationsArray = []
-        self.getStudentLocations(skip: 0)
+        self.getStudentLocations()
     }
     
     func logout() {

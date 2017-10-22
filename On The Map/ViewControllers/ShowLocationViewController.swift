@@ -100,12 +100,16 @@ extension ShowLocationViewController {
         request.httpBody = "{\"uniqueKey\": \"748492837\", \"firstName\": \"\(self.appDelegate.firstName ?? "John")\", \"lastName\": \"\(self.appDelegate.lastName ?? "Doe")\",\"mapString\": \"\(locationString!.lowercased() )\", \"mediaURL\": \"\(socialLink!)\",\"latitude\": \(selectedPin?.coordinate.latitude ?? 0), \"longitude\": \(selectedPin?.coordinate.longitude ?? 0)}".data(using: String.Encoding.utf8)
         let _ = UdacityClient.sharedInstance().handleHttpRequest(request: request as URLRequest, skipData: 0) { result, error in
             if error != nil {
-                self.presentAlert(title: "Oops", error: "An error occured, please try again!")
+                performUIUpdatesOnMain {
+                    self.presentAlert(title: "Oops", error: "An error occured, please try again!")
+                }
                 return
             }
             
             guard let objectID = result!["objectId"] else {
-                self.presentAlert(title: "Oops", error: "An error occured, please try again!")
+                performUIUpdatesOnMain {
+                    self.presentAlert(title: "Oops", error: "An error occured, please try again!")
+                }
                 return
             }
             
@@ -125,7 +129,9 @@ extension ShowLocationViewController {
         
         let _ = UdacityClient.sharedInstance().handleHttpRequest(request: request as URLRequest, skipData: 0) { _, error in
             if error != nil {
-                self.presentAlert(title: "Oops", error: "An error occured, please try again!")
+                performUIUpdatesOnMain {
+                    self.presentAlert(title: "Oops", error: "An error occured, please try again!")
+                }
                 return
             }
         }
