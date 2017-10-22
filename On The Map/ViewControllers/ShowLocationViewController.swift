@@ -39,7 +39,7 @@ class ShowLocationViewController: UIViewController {
         let search = MKLocalSearch(request: request)
         search.start(completionHandler: { response, error in
             guard (error == nil) else {
-                updateMap {
+                performUIUpdatesOnMain {
                     self.activityIndicator.stopAnimating()
                     self.presentAlert(title: "Try again!", error: "An error occurred. Try a different location")
                 }
@@ -100,6 +100,9 @@ extension ShowLocationViewController {
                     self.presentAlert(title: "Oops", error: "An error occured, please try again!")
                 }
                 return
+            }
+            performUIUpdatesOnMain {
+                (self.tabBarController as? TabBarViewController)?.getStudentLocations()
             }
         }
     }

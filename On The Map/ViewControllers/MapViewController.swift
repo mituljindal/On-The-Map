@@ -23,7 +23,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         self.locationsArray = appDelegate.locationsArray
         NotificationCenter.default.addObserver(self, selector: #selector(populate(notification:)), name: .updatedLocations, object: nil)
         
-        updateMap {
+        performUIUpdatesOnMain {
             (self.tabBarController as? TabBarViewController)?.getStudentLocations()
         }
     }
