@@ -11,7 +11,7 @@ import UIKit
 class ListViewController: UITableViewController {
 
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    var locationsArray: [studentInformation]!
+    var locationsArray: [StudentInformation]!
 
     
     override func viewDidLoad() {

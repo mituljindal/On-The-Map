@@ -54,7 +54,7 @@ class ShowLocationViewController: UIViewController {
     }
     
     @IBAction func submitPressed(_ sender: Any) {
-        self.getObjectID()
+        self.submit()
         self.dismiss(animated: true) {
             self.dismiss(animated: false, completion: nil)
         }
@@ -90,44 +90,11 @@ extension ShowLocationViewController {
         myMapView.setRegion(region, animated: true)
     }
     
-    func getObjectID() {
+    func submit() {
         
-        let request = NSMutableURLRequest(url: URL(string: URLs.objectID)!)
-        request.httpMethod = "POST"
-        request.addValue(RequestValues.XParseAppID, forHTTPHeaderField: RequestKeys.XParseAppID)
-        request.addValue(RequestValues.XParseRestApi, forHTTPHeaderField: RequestKeys.XParseRestApi)
-        request.addValue(RequestValues.contentType, forHTTPHeaderField: RequestKeys.contentType)
-        request.httpBody = "{\"uniqueKey\": \"748492837\", \"firstName\": \"\(self.appDelegate.firstName ?? "John")\", \"lastName\": \"\(self.appDelegate.lastName ?? "Doe")\",\"mapString\": \"\(locationString!.lowercased() )\", \"mediaURL\": \"\(socialLink!)\",\"latitude\": \(selectedPin?.coordinate.latitude ?? 0), \"longitude\": \(selectedPin?.coordinate.longitude ?? 0)}".data(using: String.Encoding.utf8)
-        let _ = UdacityClient.sharedInstance().handleHttpRequest(request: request as URLRequest, skipData: 0) { result, error in
-            if error != nil {
-                performUIUpdatesOnMain {
-                    self.presentAlert(title: "Oops", error: "An error occured, please try again!")
-                }
-                return
-            }
-            
-            guard let objectID = result!["objectId"] else {
-                performUIUpdatesOnMain {
-                    self.presentAlert(title: "Oops", error: "An error occured, please try again!")
-                }
-                return
-            }
-            
-            self.postLocation(objectID as! String)
-        }
-    }
-    
-    func postLocation(_ objectID: String) {
-        let urlString = URLs.postLocation + "\(objectID)"
-        let url = URL(string: urlString)
-        let request = NSMutableURLRequest(url: url!)
-        request.httpMethod = "PUT"
-        request.addValue(RequestValues.XParseAppID, forHTTPHeaderField: RequestKeys.XParseAppID)
-        request.addValue(RequestValues.XParseRestApi, forHTTPHeaderField: RequestKeys.XParseRestApi)
-        request.addValue(RequestValues.contentType, forHTTPHeaderField: RequestKeys.contentType)
-        request.httpBody = "{\"uniqueKey\": \"748492837\", \"firstName\": \"\(self.appDelegate.firstName ?? "John")\", \"lastName\": \"\(self.appDelegate.lastName ?? "Doe")\",\"mapString\": \"\(locationString!.lowercased() )\", \"mediaURL\": \"\(socialLink!)\",\"latitude\": \(selectedPin?.coordinate.latitude ?? 0), \"longitude\": \(selectedPin?.coordinate.longitude ?? 0)}".data(using: String.Encoding.utf8)
+        let httpBodyString = "{\"uniqueKey\": \"\(self.appDelegate.key ?? "748492837")\", \"firstName\": \"\(self.appDelegate.firstName ?? "John")\", \"lastName\": \"\(self.appDelegate.lastName ?? "Doe")\",\"mapString\": \"\(locationString!.lowercased() )\", \"mediaURL\": \"\(socialLink!)\",\"latitude\": \(selectedPin?.coordinate.latitude ?? 0), \"longitude\": \(selectedPin?.coordinate.longitude ?? 0)}"
         
-        let _ = UdacityClient.sharedInstance().handleHttpRequest(request: request as URLRequest, skipData: 0) { _, error in
+        UdacityClient.sharedInstance().getObjectID(httpBodyString) { result, error in
             if error != nil {
                 performUIUpdatesOnMain {
                     self.presentAlert(title: "Oops", error: "An error occured, please try again!")

@@ -12,18 +12,9 @@ import MapKit
 class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
-    var locationsArray: [studentInformation]! = []
-    let map = MapViewController()
-    let list = ListViewController()
     
     func getStudentLocations() {
-        
-        let urlString = URLs.studentLocations
-        var request = URLRequest(url: URL(string: urlString)!)
-        request.httpMethod = "GET"
-        request.addValue(RequestValues.XParseAppID, forHTTPHeaderField: RequestKeys.XParseAppID)
-        request.addValue(RequestValues.XParseRestApi, forHTTPHeaderField: RequestKeys.XParseRestApi)
-        let _ = UdacityClient.sharedInstance().handleHttpRequest(request: request, skipData: 0) { result, error in
+        UdacityClient.sharedInstance().getStudentLocations() { result, error in
             
             if error != nil {
                 performUIUpdatesOnMain {
@@ -32,34 +23,25 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
                 return
             }
             
-            if let arr = result!["results"] as? [[String: AnyObject]] {
-                for location in arr {
-                    self.appDelegate.locationsArray.append(studentInformation(location))
-                }
+            if let arr = result {
+                self.appDelegate.locationsArray = arr
                 NotificationCenter.default.post(name: .updatedLocations, object: nil)
             }
         }
     }
     
     func refresh() {
-        self.appDelegate.locationsArray = []
         self.getStudentLocations()
     }
     
     func logout() {
-        let request = NSMutableURLRequest(url: URL(string: URLs.logout)!)
-        request.httpMethod = "DELETE"
-        var xsrfCookie: HTTPCookie? = nil
-        let sharedCookieStorage = HTTPCookieStorage.shared
-        for cookie in sharedCookieStorage.cookies! {
-            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
-        }
-        if let xsrfCookie = xsrfCookie {
-            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
-        }
-        let _ = UdacityClient.sharedInstance().handleHttpRequest(request: request as URLRequest, skipData: 5) { (result, error) in
+        
+        UdacityClient.sharedInstance().logout() { (result, error) in
             
             if error != nil {
+                performUIUpdatesOnMain {
+                    self.presentAlert(title: "Oops an error occured", error: "Please try again")
+                }
                 return
             }
             

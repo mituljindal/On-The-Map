@@ -47,18 +47,9 @@ class LoginViewController: UIViewController {
             activityIndicator.startAnimating()
             UdacityClient.sharedInstance().login(username: emailTextField.text!, password: passwordTextField.text!) { (result, error) in
                 
-                func handleError() {
+                if let error = error {
                     performUIUpdatesOnMain {
-                        self.presentAlert(title: "Account not found", error: "Please check email ID and password")
-                        self.setUI(true)
-                        self.activityIndicator.stopAnimating()
-                    }
-                    
-//                    self.activityIndicator.isHidden = true
-                }
-                if let _ = error {
-                    performUIUpdatesOnMain {
-                        self.presentAlert(title: "Oops an error occurred", error: "Please try again")
+                        self.presentAlert(title: "Oops an error occurred", error: error)
                         self.setUI(true)
                         self.activityIndicator.stopAnimating()
                     }
@@ -67,6 +58,7 @@ class LoginViewController: UIViewController {
                 }
                 
                 if let user = result {
+                    self.appDelegate.key = user["key"]
                     self.appDelegate.lastName = user["lastName"]
                     self.appDelegate.firstName = user["firstName"]
                 }

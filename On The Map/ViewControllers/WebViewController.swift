@@ -38,6 +38,3 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     }
 }
 
-//extension WebViewController: UIWebViewDelegate {
-//}
-
