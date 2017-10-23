@@ -13,8 +13,8 @@ extension UdacityClient {
     func login(username: String, password: String, completion: @escaping (_ result: [String: String]?, _ error: String?) -> (Void)) {
         var request = URLRequest(url: URL(string: URLs.login)!)
         request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: RequestKeys.accept)
-        request.addValue("application/json", forHTTPHeaderField: RequestKeys.contentType)
+        request.addValue(RequestValues.accept, forHTTPHeaderField: RequestKeys.accept)
+        request.addValue(RequestValues.contentType, forHTTPHeaderField: RequestKeys.contentType)
         request.httpBody = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}".data(using: String.Encoding.utf8)
         let _ = handleHttpRequest(request: request, skipData: 5) { result, error in
             
