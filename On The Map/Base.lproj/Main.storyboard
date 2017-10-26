@@ -294,16 +294,14 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_world" translatesAutoresizingMaskIntoConstraints="NO" id="AAk-Rs-B0A">
                                 <rect key="frame" x="151" y="117" width="73" height="75"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="75" id="6S9-9y-weL"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="75" id="RhI-er-mlx"/>
-                                    <constraint firstAttribute="width" constant="73" id="qLn-yV-heH"/>
+                                    <constraint firstAttribute="height" constant="75" id="QTd-Aa-BvX"/>
+                                    <constraint firstAttribute="width" constant="73" id="uzM-Fb-2UE"/>
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your location" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="xMR-g6-6bo">
                                 <rect key="frame" x="52" y="245" width="271" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="271" id="36i-dz-PA5"/>
-                                    <constraint firstAttribute="height" constant="30" id="M83-Xp-PVc"/>
+                                    <constraint firstAttribute="width" constant="271" id="SRJ-af-Eh0"/>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
@@ -313,8 +311,8 @@
                                 <rect key="frame" x="52" y="342" width="271" height="38"/>
                                 <color key="backgroundColor" red="0.088964188550000003" green="0.8271711652" blue="0.96216261390000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="271" id="fAb-AB-XBF"/>
-                                    <constraint firstAttribute="height" constant="38" id="s2C-GP-CF6"/>
+                                    <constraint firstAttribute="width" constant="271" id="gzI-jk-uoJ"/>
+                                    <constraint firstAttribute="height" constant="38" id="mTw-G4-bmz"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                                 <state key="normal" title="Find Location">
@@ -329,8 +327,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your social link" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="rAu-9v-bbW">
                                 <rect key="frame" x="52" y="294" width="271" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="5zb-FJ-sLY"/>
-                                    <constraint firstAttribute="width" constant="271" id="sXd-st-Ohm"/>
+                                    <constraint firstAttribute="width" constant="271" id="gV3-Fm-kpJ"/>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
@@ -339,16 +336,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="RFs-09-qPb" firstAttribute="top" secondItem="rAu-9v-bbW" secondAttribute="bottom" constant="18" id="0Ht-rX-Zyx"/>
-                            <constraint firstItem="RFs-09-qPb" firstAttribute="centerX" secondItem="6vv-y6-Aay" secondAttribute="centerX" id="2AD-Io-aYR"/>
-                            <constraint firstItem="AAk-Rs-B0A" firstAttribute="top" secondItem="PhX-qb-qzT" secondAttribute="bottom" constant="53" id="3CO-BI-9XR"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="AAk-Rs-B0A" secondAttribute="trailing" constant="135" id="EZK-Qf-Dtm"/>
-                            <constraint firstItem="AAk-Rs-B0A" firstAttribute="leading" secondItem="6vv-y6-Aay" secondAttribute="leadingMargin" constant="135" id="NWu-Cb-Z5t"/>
-                            <constraint firstItem="rAu-9v-bbW" firstAttribute="centerX" secondItem="6vv-y6-Aay" secondAttribute="centerX" id="W7n-Iy-SDV"/>
-                            <constraint firstItem="rAu-9v-bbW" firstAttribute="top" secondItem="xMR-g6-6bo" secondAttribute="bottom" constant="19" id="ec9-Xh-xxC"/>
-                            <constraint firstItem="xMR-g6-6bo" firstAttribute="top" secondItem="AAk-Rs-B0A" secondAttribute="bottom" constant="53" id="qaD-wZ-puO"/>
-                            <constraint firstItem="xMR-g6-6bo" firstAttribute="centerX" secondItem="6vv-y6-Aay" secondAttribute="centerX" id="wHk-9o-TEv"/>
-                            <constraint firstItem="Fdr-QP-DdE" firstAttribute="top" secondItem="RFs-09-qPb" secondAttribute="bottom" constant="287" id="xIv-HE-qlp"/>
+                            <constraint firstItem="AAk-Rs-B0A" firstAttribute="centerX" secondItem="6vv-y6-Aay" secondAttribute="centerX" id="EOC-fH-iyo"/>
+                            <constraint firstItem="rAu-9v-bbW" firstAttribute="centerX" secondItem="6vv-y6-Aay" secondAttribute="centerX" id="FdF-mB-91x"/>
+                            <constraint firstItem="xMR-g6-6bo" firstAttribute="centerX" secondItem="6vv-y6-Aay" secondAttribute="centerX" id="Hki-nM-n2O"/>
+                            <constraint firstItem="RFs-09-qPb" firstAttribute="top" secondItem="rAu-9v-bbW" secondAttribute="bottom" constant="18" id="KL8-Of-6Kf"/>
+                            <constraint firstItem="xMR-g6-6bo" firstAttribute="top" secondItem="PhX-qb-qzT" secondAttribute="bottom" constant="181" id="LU0-fK-qO8"/>
+                            <constraint firstItem="AAk-Rs-B0A" firstAttribute="top" secondItem="PhX-qb-qzT" secondAttribute="bottom" constant="53" id="YKu-Pn-f4S"/>
+                            <constraint firstItem="RFs-09-qPb" firstAttribute="centerX" secondItem="6vv-y6-Aay" secondAttribute="centerX" id="qsx-94-aDK"/>
+                            <constraint firstItem="rAu-9v-bbW" firstAttribute="top" secondItem="xMR-g6-6bo" secondAttribute="bottom" constant="19" id="zfd-is-Gwa"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="mxc-rr-S3Z">
