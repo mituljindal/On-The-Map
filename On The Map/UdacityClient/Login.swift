@@ -10,7 +10,7 @@ import Foundation
 
 extension UdacityClient {
     
-    func login(username: String, password: String, completion: @escaping (_ result: [String: String]?, _ error: String?) -> (Void)) {
+    func login(username: String, password: String, completion: @escaping (_ result: Bool, _ error: String?) -> (Void)) {
         var request = URLRequest(url: URL(string: URLs.login)!)
         request.httpMethod = "POST"
         request.addValue(RequestValues.accept, forHTTPHeaderField: RequestKeys.accept)
@@ -20,13 +20,13 @@ extension UdacityClient {
             
             func handleError() {
                 performUIUpdatesOnMain {
-                    completion(nil, "Please check email ID and password")
+                    completion(false, "Please check email ID and password")
                 }
             }
             
             if error != nil {
                 performUIUpdatesOnMain {
-                    completion(nil, error)
+                    completion(false, error)
                 }
                 return
             }
@@ -51,7 +51,7 @@ extension UdacityClient {
         }
     }
     
-    func getUserInfo(_ id: String, completion: @escaping (_ result: [String: String]?, _ error: String?) -> (Void)) {
+    func getUserInfo(_ id: String, completion: @escaping (_ result: Bool, _ error: String?) -> (Void)) {
         var request = URLRequest(url: URL(string: URLs.getAccountInfo + id)!)
         request.httpMethod = "GET"
         let _ = handleHttpRequest(request: request, skipData: 5) { result, error in
@@ -69,16 +69,16 @@ extension UdacityClient {
                 } else { firstName = "John" }
             } else {
                 performUIUpdatesOnMain {
-                    completion(nil, "Can't find user account")
+                    completion(false, "Can't find user account")
                 }
                 return
             }
-            var studentDetails = [String: String]()
-            studentDetails["key"] = id
-            studentDetails["firstName"] = firstName
-            studentDetails["lastName"] = lastName
+            
+            self.key = id
+            self.firstName = firstName
+            self.lastName = lastName
             performUIUpdatesOnMain {
-                completion(studentDetails, nil)
+                completion(true, nil)
             }
         }
     }

@@ -11,8 +11,6 @@ import MapKit
 
 class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
-    var appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
     func getStudentLocations() {
         UdacityClient.sharedInstance.getStudentLocations() { result, error in
             

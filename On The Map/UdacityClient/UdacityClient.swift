@@ -10,8 +10,10 @@ import UIKit
 
 class UdacityClient {
     
-    var appDelegate = UIApplication.shared.delegate as! AppDelegate
     var locationsArray: [StudentInformation] = []
+    var lastName: String?
+    var firstName: String?
+    var key: String?
     
     func handleHttpRequest(request: URLRequest, skipData: Int, completion: @escaping (_ result: [String: AnyObject]?, _ error: String?) -> (Void)) -> URLSessionDataTask{
         

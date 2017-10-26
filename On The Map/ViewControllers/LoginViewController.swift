@@ -17,8 +17,6 @@ class LoginViewController: UIViewController {
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
-    var appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -56,14 +54,11 @@ class LoginViewController: UIViewController {
                     return
                 }
                 
-                if let user = result {
-                    self.appDelegate.key = user["key"]
-                    self.appDelegate.lastName = user["lastName"]
-                    self.appDelegate.firstName = user["firstName"]
-                }
-                performUIUpdatesOnMain {
-                    self.activityIndicator.stopAnimating()
-                    self.completeLogin()
+                if result {
+                    performUIUpdatesOnMain {
+                        self.activityIndicator.stopAnimating()
+                        self.completeLogin()
+                    }
                 }
             }
         }
