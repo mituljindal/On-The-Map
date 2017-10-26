@@ -45,7 +45,7 @@ class LoginViewController: UIViewController {
         } else {
             setUI(false)
             activityIndicator.startAnimating()
-            UdacityClient.sharedInstance().login(username: emailTextField.text!, password: passwordTextField.text!) { (result, error) in
+            UdacityClient.sharedInstance.login(username: emailTextField.text!, password: passwordTextField.text!) { (result, error) in
                 
                 if let error = error {
                     performUIUpdatesOnMain {
@@ -53,7 +53,6 @@ class LoginViewController: UIViewController {
                         self.setUI(true)
                         self.activityIndicator.stopAnimating()
                     }
-                    
                     return
                 }
                 
@@ -62,10 +61,10 @@ class LoginViewController: UIViewController {
                     self.appDelegate.lastName = user["lastName"]
                     self.appDelegate.firstName = user["firstName"]
                 }
-            }
-            performUIUpdatesOnMain {
-                self.activityIndicator.stopAnimating()
-                self.completeLogin()
+                performUIUpdatesOnMain {
+                    self.activityIndicator.stopAnimating()
+                    self.completeLogin()
+                }
             }
         }
     }

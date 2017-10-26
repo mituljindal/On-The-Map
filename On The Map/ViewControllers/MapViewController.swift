@@ -15,27 +15,20 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
     var annotations = [MKPointAnnotation]()
-    var locationsArray: [StudentInformation]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.locationsArray = appDelegate.locationsArray
-        NotificationCenter.default.addObserver(self, selector: #selector(populate(notification:)), name: .updatedLocations, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(populateMap), name: .updatedLocations, object: nil)
         
         performUIUpdatesOnMain {
             (self.tabBarController as? TabBarViewController)?.getStudentLocations()
         }
     }
-    
-    @objc func populate(notification: NSNotification) {
-        self.locationsArray = appDelegate.locationsArray
-        populateMap()
-    }
 
-    func populateMap() {
+    @objc func populateMap() {
 
-        for dictionary in self.locationsArray {
+        for dictionary in UdacityClient.sharedInstance.locationsArray {
             
             let lat = CLLocationDegrees(dictionary.latitude)
             let long = CLLocationDegrees(dictionary.longitude)
@@ -74,7 +67,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         if control == view.rightCalloutAccessoryView {
             if let urlString = view.annotation?.subtitle {
                 guard let url = URL(string: urlString!) else {return}
-                UIApplication.shared.open(url, options: [:])
+                if(UIApplication.shared.canOpenURL(url)) {
+                    UIApplication.shared.open(url, options: [:])
+                } else {
+                    presentAlert(title: "Broken link", error: "Looks like the user has not specified a proper social link")
+                }
             }
         }
     }

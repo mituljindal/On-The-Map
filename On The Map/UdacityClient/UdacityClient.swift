@@ -6,24 +6,27 @@
 //  Copyright © 2017 mitul jindal. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class UdacityClient {
     
+    var appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var locationsArray: [StudentInformation] = []
+    
     func handleHttpRequest(request: URLRequest, skipData: Int, completion: @escaping (_ result: [String: AnyObject]?, _ error: String?) -> (Void)) -> URLSessionDataTask{
-        
-        func handlerError(error: String) {
-            performUIUpdatesOnMain {
-                completion(nil, error)
-//                return
-            }
-        }
         
         let session = URLSession.shared
         let task = session.dataTask(with: request as URLRequest) {(data, response, error) in
             
+            func handlerError(error: String) {
+                performUIUpdatesOnMain {
+                    completion(nil, error)
+                }
+                return
+            }
+            
             guard (error == nil) else {
-                handlerError(error: (error as! String))
+                handlerError(error: "Please check your internet connection")
                 return
             }
             
@@ -64,10 +67,11 @@ class UdacityClient {
         return task
     }
     
-    class func sharedInstance() -> UdacityClient {
-        struct Singleton {
-            static var sharedInstance = UdacityClient()
-        }
-        return Singleton.sharedInstance
-    }
+    static let sharedInstance = UdacityClient()
+//    class func sharedInstance() -> UdacityClient {
+//        struct Singleton {
+//            static var sharedInstance = UdacityClient()
+//        }
+//        return Singleton.sharedInstance
+//    }
 }

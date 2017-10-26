@@ -92,9 +92,13 @@ extension ShowLocationViewController {
     
     func submit() {
         
-        let httpBodyString = "{\"uniqueKey\": \"\(self.appDelegate.key ?? "748492837")\", \"firstName\": \"\(self.appDelegate.firstName ?? "John")\", \"lastName\": \"\(self.appDelegate.lastName ?? "Doe")\",\"mapString\": \"\(locationString!.lowercased() )\", \"mediaURL\": \"\(socialLink!)\",\"latitude\": \(selectedPin?.coordinate.latitude ?? 0), \"longitude\": \(selectedPin?.coordinate.longitude ?? 0)}"
+        let location = self.locationString!.lowercased()
+        let link = self.socialLink!
+        let latitude = self.selectedPin?.coordinate.latitude ?? 0
+        let longitude = self.selectedPin?.coordinate.longitude ?? 0
         
-        UdacityClient.sharedInstance().getObjectID(httpBodyString) { result, error in
+        
+        UdacityClient.sharedInstance.getObjectID(location, link, latitude, longitude) { result, error in
             if error != nil {
                 performUIUpdatesOnMain {
                     self.presentAlert(title: "Oops", error: "An error occured, please try again!")

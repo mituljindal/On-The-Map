@@ -11,28 +11,25 @@ import UIKit
 class ListViewController: UITableViewController {
 
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    var locationsArray: [StudentInformation]!
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(reload(notification:)), name: .updatedLocations, object: nil)
-        self.locationsArray = appDelegate.locationsArray
     }
     
     @objc func reload(notification: NSNotification) {
-        self.locationsArray = appDelegate.locationsArray
         tableView.reloadData()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.locationsArray.count
+        return UdacityClient.sharedInstance.locationsArray.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell")!
-        let location = self.locationsArray[indexPath.row]
+        let location = UdacityClient.sharedInstance.locationsArray[indexPath.row]
         
         cell.textLabel?.text = "\(location.firstName) \(location.lastName)"
         cell.imageView?.image = #imageLiteral(resourceName: "icon_pin")
@@ -41,8 +38,13 @@ class ListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let url = URL(string:(self.locationsArray[indexPath.row]).mediaURL) else {return}
-        UIApplication.shared.open(url, options: [:])
+        tableView.deselectRow(at: indexPath, animated: true)
+        guard let url = URL(string:(UdacityClient.sharedInstance.locationsArray[indexPath.row]).mediaURL) else {return}
+        if(UIApplication.shared.canOpenURL(url)) {
+            UIApplication.shared.open(url, options: [:])
+        } else {
+            presentAlert(title: "Broken link", error: "Looks like the user has not specified a proper social link")
+        }
     }
     
     @IBAction func logout(_ sender: Any) {

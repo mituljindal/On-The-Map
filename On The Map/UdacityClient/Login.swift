@@ -25,7 +25,10 @@ extension UdacityClient {
             }
             
             if error != nil {
-                completion(nil, error)
+                performUIUpdatesOnMain {
+                    completion(nil, error)
+                }
+                return
             }
             
             if let account = result!["account"] as? [String: AnyObject] {

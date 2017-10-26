@@ -14,7 +14,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     func getStudentLocations() {
-        UdacityClient.sharedInstance().getStudentLocations() { result, error in
+        UdacityClient.sharedInstance.getStudentLocations() { result, error in
             
             if error != nil {
                 performUIUpdatesOnMain {
@@ -23,8 +23,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
                 return
             }
             
-            if let arr = result {
-                self.appDelegate.locationsArray = arr
+            if result {
                 NotificationCenter.default.post(name: .updatedLocations, object: nil)
             }
         }
@@ -36,7 +35,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
     func logout() {
         
-        UdacityClient.sharedInstance().logout() { (result, error) in
+        UdacityClient.sharedInstance.logout() { (result, error) in
             
             if error != nil {
                 performUIUpdatesOnMain {

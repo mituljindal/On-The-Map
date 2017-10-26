@@ -10,7 +10,7 @@ import Foundation
 
 extension UdacityClient {
     
-    func getStudentLocations(completion: @escaping (_ result: [StudentInformation]?, _ error: String?) -> (Void)) {
+    func getStudentLocations(completion: @escaping (_ result: Bool, _ error: String?) -> (Void)) {
         
         let urlString = URLs.studentLocations
         var request = URLRequest(url: URL(string: urlString)!)
@@ -21,7 +21,7 @@ extension UdacityClient {
             
             if error != nil {
                 performUIUpdatesOnMain {
-                    completion(nil, error)
+                    completion(false, error)
                 }
                 return
             }
@@ -32,8 +32,9 @@ extension UdacityClient {
                 for location in arr {
                     locationsArray.append(StudentInformation(location))
                 }
+                self.locationsArray = locationsArray
                 performUIUpdatesOnMain {
-                    completion(locationsArray, nil)
+                    completion(true, nil)
                 }
             }
         }

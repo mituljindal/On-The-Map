@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    var locationsArray: [StudentInformation] = []
+//    var locationsArray: [StudentInformation] = []
     
     var lastName: String?
     var firstName: String?
