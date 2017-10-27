@@ -36,6 +36,10 @@ extension UdacityClient {
                 performUIUpdatesOnMain {
                     completion(true, nil)
                 }
+            } else {
+                performUIUpdatesOnMain {
+                    completion(false, "Invalid request")
+                }
             }
         }
     }

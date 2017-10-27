@@ -48,7 +48,7 @@ extension UdacityClient {
         request.addValue(RequestValues.contentType, forHTTPHeaderField: RequestKeys.contentType)
         request.httpBody = "{\"uniqueKey\": \"\(self.key ?? "748492837")\", \"firstName\": \"\(self.firstName ?? "John")\", \"lastName\": \"\(self.lastName ?? "Doe")\",\"mapString\": \"\(location)\", \"mediaURL\": \"\(link)\",\"latitude\": \(latitude), \"longitude\": \(longitude)}".data(using: String.Encoding.utf8)
         
-        let _ = handleHttpRequest(request: request as URLRequest, skipData: 0) { _, error in
+        let _ = handleHttpRequest(request: request as URLRequest, skipData: 0) { result, error in
             if error != nil {
                 performUIUpdatesOnMain {
                     completion(nil, "error")
@@ -56,8 +56,21 @@ extension UdacityClient {
                 return
             }
             
-            performUIUpdatesOnMain {
-                completion("complete", nil)
+            guard let result = result else {
+                performUIUpdatesOnMain {
+                    completion(nil, "No result")
+                }
+                return
+            }
+            
+            if let _ = result["updatedAt"] {
+                performUIUpdatesOnMain {
+                    completion("complete", nil)
+                }
+            } else {
+                performUIUpdatesOnMain {
+                    completion(nil, "Bad result")
+                }
             }
         }
     }
