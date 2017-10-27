@@ -27,7 +27,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     @objc func populateMap() {
 
-        for dictionary in UdacityClient.sharedInstance.locationsArray {
+        for dictionary in Locations.sharedInstance.locationsArray {
             
             let lat = CLLocationDegrees(dictionary.latitude)
             let long = CLLocationDegrees(dictionary.longitude)

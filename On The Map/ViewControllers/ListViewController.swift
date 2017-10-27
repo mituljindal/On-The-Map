@@ -21,12 +21,12 @@ class ListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return UdacityClient.sharedInstance.locationsArray.count
+        return Locations.sharedInstance.locationsArray.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell")!
-        let location = UdacityClient.sharedInstance.locationsArray[indexPath.row]
+        let location = Locations.sharedInstance.locationsArray[indexPath.row]
         
         cell.textLabel?.text = "\(location.firstName) \(location.lastName)"
         cell.imageView?.image = #imageLiteral(resourceName: "icon_pin")
@@ -36,7 +36,7 @@ class ListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        guard let url = URL(string:(UdacityClient.sharedInstance.locationsArray[indexPath.row]).mediaURL) else {return}
+        guard let url = URL(string:(Locations.sharedInstance.locationsArray[indexPath.row]).mediaURL) else {return}
         if(UIApplication.shared.canOpenURL(url)) {
             UIApplication.shared.open(url, options: [:])
         } else {

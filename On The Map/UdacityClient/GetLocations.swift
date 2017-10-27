@@ -32,7 +32,7 @@ extension UdacityClient {
                 for location in arr {
                     locationsArray.append(StudentInformation(location))
                 }
-                self.locationsArray = locationsArray
+                Locations.sharedInstance.locationsArray = locationsArray
                 performUIUpdatesOnMain {
                     completion(true, nil)
                 }

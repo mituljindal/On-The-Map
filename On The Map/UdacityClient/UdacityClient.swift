@@ -10,11 +10,6 @@ import UIKit
 
 class UdacityClient {
     
-    var locationsArray: [StudentInformation] = []
-    var lastName: String?
-    var firstName: String?
-    var key: String?
-    
     func handleHttpRequest(request: URLRequest, skipData: Int, completion: @escaping (_ result: [String: AnyObject]?, _ error: String?) -> (Void)) -> URLSessionDataTask{
         
         let session = URLSession.shared
@@ -70,10 +65,4 @@ class UdacityClient {
     }
     
     static let sharedInstance = UdacityClient()
-//    class func sharedInstance() -> UdacityClient {
-//        struct Singleton {
-//            static var sharedInstance = UdacityClient()
-//        }
-//        return Singleton.sharedInstance
-//    }
 }

@@ -74,9 +74,9 @@ extension UdacityClient {
                 return
             }
             
-            self.key = id
-            self.firstName = firstName
-            self.lastName = lastName
+            Locations.sharedInstance.key = id
+            Locations.sharedInstance.firstName = firstName
+            Locations.sharedInstance.lastName = lastName
             performUIUpdatesOnMain {
                 completion(true, nil)
             }

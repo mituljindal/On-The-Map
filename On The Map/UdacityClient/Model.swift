@@ -25,3 +25,13 @@ struct StudentInformation {
         self.mediaURL = location["mediaURL"] as? String ?? "https://www.udacity.com"
     }
 }
+
+class Locations {
+    
+    var locationsArray: [StudentInformation] = []
+    var lastName: String?
+    var firstName: String?
+    var key: String?
+    
+    static let sharedInstance = Locations()
+}
