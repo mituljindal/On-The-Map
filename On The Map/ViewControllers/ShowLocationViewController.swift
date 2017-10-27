@@ -54,9 +54,29 @@ class ShowLocationViewController: UIViewController {
     }
     
     @IBAction func submitPressed(_ sender: Any) {
-        self.submit()
-        self.dismiss(animated: true) {
-            self.dismiss(animated: false, completion: nil)
+        self.activityIndicator.startAnimating()
+        let location = self.locationString!.lowercased()
+        let link = self.socialLink!
+        let latitude = self.selectedPin?.coordinate.latitude ?? 0
+        let longitude = self.selectedPin?.coordinate.longitude ?? 0
+        
+        UdacityClient.sharedInstance.getObjectID(location, link, latitude, longitude) { result, error in
+            if error != nil {
+                performUIUpdatesOnMain {
+                    self.activityIndicator.stopAnimating()
+                    self.presentAlert(title: "Oops", error: "An error occured, please try again!")
+                }
+                return
+            }
+            performUIUpdatesOnMain {
+                self.activityIndicator.stopAnimating()
+                self.dismiss(animated: true) {
+                    print("called")
+                    UdacityClient.sharedInstance.getStudentLocations(completion: ) { (_,_) in
+                        
+                    }
+                }
+            }
         }
     }
     
@@ -88,26 +108,5 @@ extension ShowLocationViewController {
         let span = MKCoordinateSpanMake(0.05, 0.05)
         let region = MKCoordinateRegionMake(placemark.coordinate, span)
         myMapView.setRegion(region, animated: true)
-    }
-    
-    func submit() {
-        
-        let location = self.locationString!.lowercased()
-        let link = self.socialLink!
-        let latitude = self.selectedPin?.coordinate.latitude ?? 0
-        let longitude = self.selectedPin?.coordinate.longitude ?? 0
-        
-        
-        UdacityClient.sharedInstance.getObjectID(location, link, latitude, longitude) { result, error in
-            if error != nil {
-                performUIUpdatesOnMain {
-                    self.presentAlert(title: "Oops", error: "An error occured, please try again!")
-                }
-                return
-            }
-            performUIUpdatesOnMain {
-                (self.tabBarController as? TabBarViewController)?.getStudentLocations()
-            }
-        }
     }
 }

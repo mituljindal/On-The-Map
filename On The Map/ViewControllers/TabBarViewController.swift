@@ -12,6 +12,7 @@ import MapKit
 class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
     func getStudentLocations() {
+        
         UdacityClient.sharedInstance.getStudentLocations() { result, error in
             
             if error != nil {
@@ -19,10 +20,6 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
                     self.presentAlert(title: "Oops an error occured", error: "Please press refresh")
                 }
                 return
-            }
-            
-            if result {
-                NotificationCenter.default.post(name: .updatedLocations, object: nil)
             }
         }
     }

@@ -11,7 +11,7 @@ import Foundation
 extension UdacityClient {
     
     func getStudentLocations(completion: @escaping (_ result: Bool, _ error: String?) -> (Void)) {
-        
+        print("getting")
         let urlString = URLs.studentLocations
         var request = URLRequest(url: URL(string: urlString)!)
         request.httpMethod = "GET"
@@ -34,6 +34,7 @@ extension UdacityClient {
                 }
                 Locations.sharedInstance.locationsArray = locationsArray
                 performUIUpdatesOnMain {
+                    NotificationCenter.default.post(name: .updatedLocations, object: nil)
                     completion(true, nil)
                 }
             } else {
